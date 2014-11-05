@@ -8,13 +8,18 @@
         $scope.currentUser = {};
         $scope.currentUser = listFactory.currentUser;
 
+        $scope.saveClick = function()
+        {
+            listFactory.saveClick($scope.currentUser);
+        }
 
         $scope.changeUser = function (event, user)
         {
-            //$log.log(event);
+             //$log.log(event);
             //$log.log(user.id);
             listFactory.setCurrentUser(user);
-            $scope.currentUser = listFactory.currentUser;
+            $scope.currentUser = listFactory.scatterCurrentUser();
+            //$log.log("scatter "+$scope.currentUser.name);
         };
 
         $scope.currentRowIndicator = function (user)
