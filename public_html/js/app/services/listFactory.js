@@ -13,6 +13,12 @@
         factory.currentUser = {'name': '', 'address': '', 'id': 0, is_current: false};
         factory.userListIndex = {} // list of users by id
 
+        factory.setOnUserChange = function(u)
+        {
+            $log.log("u "+u)
+            u(factory.currentUser);
+        }
+
         factory.resetCurrentStatus = function ()
         {
 
