@@ -37,11 +37,11 @@ and open the template in the editor.
                     <table   style="width:100%">
                         <thead style="width:100%">     
                             <tr>
-                                <th class="tableHeader" style="width:30%">Name</th>
+                                <th class="tableHeader" style="width:36%">Name</th>
                                 <th class="tableHeader" style="width:19%">City </th>
                                 <th class="tableHeader" style="width:10%">State</th>
-                                <th class="tableHeader" style="width:15%">Zip Code</th>
-                                <th class="tableHeader" style="width:11%">Version</th>
+                                <th class="tableHeader" style="width:10%">Zip</th>
+                                <th class="tableHeader" style="width:10%">Ver</th>
 
                                 <th class="tableHeader" style="width:15%">&nbsp;</th>
                             </tr>
@@ -51,11 +51,11 @@ and open the template in the editor.
                             <tr ng-repeat="restaurant in restaurantList"
                                 data-ng-click="changeRestaurant($event, restaurant)" >
 
-                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:30%" class="col-sm-height editRow" data-id="{{restaurant.id}}">{{restaurant.name}}</td>
+                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:36%" class="col-sm-height editRow" data-id="{{restaurant.id}}">{{restaurant.name}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:19%" class="col-sm-height editRow">{{restaurant.city}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%" class="col-sm-height editRow">{{restaurant.state}}</td>
-                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%" class="col-sm-height editRow">{{restaurant.zipCode}}</td>
-                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:11%"  class="col-sm-height editRow">{{restaurant.version}}</td>
+                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%" class="col-sm-height editRow">{{restaurant.zipCode}}</td>
+                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%"  class="col-sm-height editRow">{{restaurant.version}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%"  class="col-sm-height editRow"><i class="icon-remove"></i><span class=" btn-xs btn-danger">Delete</span></td>
 
                             </tr>  
@@ -116,8 +116,8 @@ and open the template in the editor.
 
 
 
-                <div class="panel panel-default col-lg-6">
-                    <div class="panel-body">fred</div>
+                <div class="col-lg-6">
+                    <div><h4 style="display: inline-block">Reviews</h4></div>
 
 
                 </div>
