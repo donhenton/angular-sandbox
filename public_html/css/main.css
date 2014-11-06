@@ -11,16 +11,15 @@ fixed header tables
 
 
 
-
-
+ 
  
 
 .ptrClass {cursor:pointer }
 
 div.restaurantContainer {
     
-    padding-bottom: 20px;
-    padding-left:50px;
+    padding: 20px;
+    
 }
 
 /*.selectedRow {background-color: #a47e3c;color:white}*/
@@ -38,7 +37,10 @@ div.restaurantContainer {
     color: white;
    
 }
-
+.restaurantScrollList
+{
+    border: thin solid #3a87ad
+}
 
 .restaurantScrollList table {
     width: 100%;
@@ -59,6 +61,7 @@ tr:after {
 .restaurantScrollList tr
 {
    padding:2px;
+   
   
 }
 .restaurantScrollList td

@@ -29,9 +29,9 @@ and open the template in the editor.
 
 
 
-        <div class="restaurantContainer col-lg-10">
+        <div class="restaurantContainer col-lg-8">
 
-            <div   ng-controller="listRestaurantController" >
+            <div   ng-controller="listRestaurantController">
                 <div class="restaurantScrollList">
                     <!-- Example row of columns -->
                     <table   style="width:100%">
@@ -57,7 +57,7 @@ and open the template in the editor.
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%" class="col-sm-height editRow">{{restaurant.zipCode}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:11%"  class="col-sm-height editRow">{{restaurant.version}}</td>
 
-                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:14%"  class="col-sm-height editRow"><span class="btn-danger"> <i class="icon-remove icon-white"></i> Delete</span></td>
+                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:14%"  class="col-sm-height editRow"><i class="icon-remove"></i><span class=" btn-xs btn-danger">Delete</span></td>
 
                             </tr>  
                         </tbody>
@@ -67,43 +67,62 @@ and open the template in the editor.
                 </div>
             </div> 
 
-            <div class="row">
-                <label class="control-label" for="name"></label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on">Name</span>
-                        <input id="name" name="name" class="input-xlarge" placeholder="Name"  value="{{name}}" type="text" required="">
-                    </div>
-                    <div class="input-prepend">
-                        <span class="add-on">City</span>
-                        <input id="city" name="city" class="input-medium" placeholder="City"  value="{{city}}"  type="text" required="">
-                    </div>
-                    <div class="input-prepend">
-                        <span class="add-on">State</span>
-                        <input id="state" name="city" class="input-small" placeholder="State"   value="{{state}}" type="text" required="">
-                    </div>
-                    <div class="input-prepend">
-                        <span class="add-on">Zip Code</span>
-                        <input id="zipCode" name="zipCode" class="input-small" placeholder="Zip Code"  value="{{zipCode}}"  type="text" required="">
-                    </div>
-                    <div class="input-prepend">
-                        <span class="add-on">Version</span>
-                        <input id="version" name="version" class="input-small" placeholder="Version"   value="{{version}}" type="text" required="">
+            <div class="row" style="margin:10px">
+                <div class="panel panel-default col-lg-5">
+                    <div class="panel-body">
+
+                        <form class="form-horizontal" role="form">
+
+                            <div class="form-group">
+                                <label for="name" class="col-lg-2 control-label">Name</label>
+                                <div class="col-lg-10">
+                                    <input id="name"  ng-model="currentRestaurant.name" type="text" placeholder="Name" class="form-control" required="" autofocus="">    
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city" class="col-lg-2 control-label">City</label>
+                                <div class="col-lg-10">
+                                    <input id="address"  ng-model="currentRestaurant.city" type="text" placeholder="City" class="form-control" required="" autocomplete="on">    
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state" class="col-lg-2 control-label">State</label>
+                                <div class="col-lg-4">
+                                    <input id="city"  ng-model="currentRestaurant.state" type="text" placeholder="State" class="form-control" required="">    
+                                </div>
+
+                                <label for="zipCode" class="col-lg-2 control-label">Zip Code</label>
+                                <div class="col-lg-4">
+                                    <input  class="form-control" ng-model="currentRestaurant.zipCode" id="zipCode" placeholder="Zip Code">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button  ng-click="saveClick()" class="btn btn-primary">Save</button>
+                                <button  ng-click="saveClick()" class="btn btn-primary">Cancel</button>
+                            </div>
                     </div>
                 </div>
+                <!-- begin reviews -->
+
+
+
+                <div class="panel panel-default col-lg-7">
+                    <div class="panel-body">fred</div>
+
+
+                </div>
             </div>
-
-        </div>
-
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.js"><\/script>')</script>
-        <script src="js/app/mock/MockData.js" type="text/javascript"></script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
-        <script src="js/app/app.js" type="text/javascript"></script>
-        <script src="js/app/messagePump.js" type="text/javascript"></script>
-        <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
-        <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
-        <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
-        <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
+            <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.js"><\/script>')</script>
+            <script src="js/app/mock/MockData.js" type="text/javascript"></script>
+            <script src="js/vendor/bootstrap.min.js"></script>
+            <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
+            <script src="js/app/app.js" type="text/javascript"></script>
+            <script src="js/app/messagePump.js" type="text/javascript"></script>
+            <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
+            <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
+            <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
+            <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
     </body>
 </html>
