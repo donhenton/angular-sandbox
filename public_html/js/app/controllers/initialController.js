@@ -2,7 +2,7 @@
 
     var initialController = function ($scope, $log, listFactory) {
 
-
+        $log.log("in initial")
 
         $scope.userList = listFactory.userList;
         $scope.currentUser = {};
