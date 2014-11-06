@@ -2,23 +2,21 @@
 
     var editUserController = function ($scope, $log, listFactory) {
 
-        $log.log("edituser controller")
-        var nameChangeHandler = function(user)
-        {
-            $log.log("handler "+user.name);
-        }
-        listFactory.setOnUserChange(nameChangeHandler);
+        $log.log("in edituser")
         
-        $scope.currentUser = listFactory.scatterCurrentUser();
-
+        var nameChangeHandler = function(u )
+        {
+            //don't use u for currentUser as it is a live ref
+            // not a copy, just here for param demonstration
+            $scope.currentUser = listFactory.scatterCurrentUser(); 
+            $log.log("called name change handler "+u.name)
+        }
+        listFactory.callThisOnUserChange = nameChangeHandler;
+       // listFactory.setOnUserChange(nameChangeHandler);
         $scope.saveClick = function()
         {
             listFactory.saveClick($scope.currentUser);
         }
-
-      
-
-         
 
     }
 
@@ -26,6 +24,6 @@
     angular.module('listApp')
             .controller('editUserController', editUserController);
     
-    console.log("editUserController")
+    
 
 }());

@@ -2,7 +2,7 @@
 
     var listUserController = function ($scope, $log, listFactory) {
 
-        
+        $log.log("in list");
 
         $scope.userList = listFactory.userList;
          

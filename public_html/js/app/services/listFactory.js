@@ -6,19 +6,15 @@
 
 
 (function () {
-    var listFactory = function ($log) {
+    var listFactory = function ($log,messageFactory) {
 
         var factory = {};
         factory.userList = null;
+        factory.callThisOnUserChange = null;
         factory.currentUser = {'name': '', 'address': '', 'id': 0, is_current: false};
         factory.userListIndex = {} // list of users by id
-
-        factory.setOnUserChange = function(u)
-        {
-            $log.log("u "+u)
-            u(factory.currentUser);
-        }
-
+        $log.log("m "+messageFactory);
+ 
         factory.resetCurrentStatus = function ()
         {
 
@@ -32,6 +28,7 @@
             this.resetCurrentStatus();
             user.is_current = true;
             factory.currentUser = user;
+            factory.callThisOnUserChange(user);
 
         };
 
@@ -109,7 +106,7 @@
         return factory;
     };
 
-    listFactory.$inject = ['$log'];
+    listFactory.$inject = ['$log','messageFactory'];
 
     angular.module('listApp').factory('listFactory', listFactory);
 
