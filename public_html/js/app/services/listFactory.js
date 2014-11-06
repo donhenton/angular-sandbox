@@ -106,7 +106,7 @@
         return factory;
     };
 
-    listFactory.$inject = ['$log','messageFactory'];
+    listFactory.$inject = ['$log'];
 
     angular.module('listApp').factory('listFactory', listFactory);
 
