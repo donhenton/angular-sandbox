@@ -11,6 +11,11 @@
             $scope.currentRestaurant = restaurantFactory.scatterCurrentRestaurant(); 
              
         }
+        
+        $scope.cancelClick = function()
+        {
+           $scope.currentRestaurant =  restaurantFactory.cancelClick();
+        }
     
         $scope.saveClick = function()
         {

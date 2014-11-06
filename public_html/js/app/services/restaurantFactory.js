@@ -28,7 +28,7 @@
             this.resetCurrentStatus();
             restaurant.is_current = true;
             factory.currentRestaurant = restaurant;
-           // factory.callThisOnRestaurantChange(restaurant);
+            messageFactory.raiseEvent(restaurant,"ON_RESTAURANT_CHANGE");
 
         };
 
@@ -67,6 +67,19 @@
             destRestaurant.is_current = sourceRestaurant.is_current;
             destRestaurant.id = sourceRestaurant.id;
         }
+        
+         factory.createEmptyRestaurant = function()
+        {
+            var destRestaurant = {};
+            destRestaurant.name = "";
+            destRestaurant.zipCode = "";
+            destRestaurant.city = "";
+            destRestaurant.state = "";
+            destRestaurant.version = 0;
+            destRestaurant.is_current = false;
+            destRestaurant.id = 0;
+            return destRestaurant;
+        }
 
         factory.saveClick = function (newRestaurant)
         {
@@ -76,6 +89,14 @@
                 this.loadRestaurant(lookup, newRestaurant);
 
             }
+        };
+
+        factory.cancelClick = function ( )
+        {
+             var res = factory.createEmptyRestaurant();
+             factory.setCurrentRestaurant(res);
+             messageFactory.raiseEvent(restaurant,"ON_RESTAURANT_CHANGE");
+             return res;
         };
 
         //this would be a service call
@@ -103,7 +124,7 @@
         return factory;
     };
 
-    restaurantFactory.$inject = ['$log'];
+    restaurantFactory.$inject = ['$log','messageFactory'];
 
     angular.module('restaurantApp').factory('restaurantFactory', restaurantFactory);
 

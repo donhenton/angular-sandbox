@@ -56,7 +56,6 @@ and open the template in the editor.
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%" class="col-sm-height editRow">{{restaurant.state}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%" class="col-sm-height editRow">{{restaurant.zipCode}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:11%"  class="col-sm-height editRow">{{restaurant.version}}</td>
-
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%"  class="col-sm-height editRow"><i class="icon-remove"></i><span class=" btn-xs btn-danger">Delete</span></td>
 
                             </tr>  
@@ -109,7 +108,7 @@ and open the template in the editor.
                             
                             <div class="form-group">
                                 <button  ng-click="saveClick()" class="btn btn-small btn-primary">Save</button>
-                                <button  ng-click="saveClick()" class="btn btn-small  btn-primary">Cancel</button>
+                                <button  ng-click="cancelClick()" class="btn btn-small  btn-primary">Cancel</button>
                             </div>
                     </div>
                 </div>

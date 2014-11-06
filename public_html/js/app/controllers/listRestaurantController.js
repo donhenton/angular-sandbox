@@ -11,7 +11,6 @@
         {
 
             restaurantFactory.setCurrentRestaurant(restaurant);
-            messageFactory.raiseEvent(restaurant,"ON_RESTAURANT_CHANGE");
            
         };
 
