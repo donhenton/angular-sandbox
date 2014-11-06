@@ -50,14 +50,14 @@ div.restaurantContainer {
    
     display:block; }
 
-/* 
+ 
 
 tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both; 
-} */
+} 
 .restaurantScrollList tr
 {
    padding:2px;
