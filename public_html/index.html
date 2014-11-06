@@ -38,12 +38,12 @@ and open the template in the editor.
                         <thead style="width:100%">     
                             <tr>
                                 <th class="tableHeader" style="width:30%">Name</th>
-                                <th class="tableHeader" style="width:17%">City </th>
+                                <th class="tableHeader" style="width:19%">City </th>
                                 <th class="tableHeader" style="width:10%">State</th>
                                 <th class="tableHeader" style="width:15%">Zip Code</th>
                                 <th class="tableHeader" style="width:11%">Version</th>
 
-                                <th class="tableHeader" style="width:17%">&nbsp;</th>
+                                <th class="tableHeader" style="width:15%">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody style="width:100%">
@@ -52,12 +52,12 @@ and open the template in the editor.
                                 data-ng-click="changeRestaurant($event, restaurant)" >
 
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:30%" class="col-sm-height editRow" data-id="{{restaurant.id}}">{{restaurant.name}}</td>
-                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:20%" class="col-sm-height editRow">{{restaurant.city}}</td>
+                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:19%" class="col-sm-height editRow">{{restaurant.city}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%" class="col-sm-height editRow">{{restaurant.state}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%" class="col-sm-height editRow">{{restaurant.zipCode}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:11%"  class="col-sm-height editRow">{{restaurant.version}}</td>
 
-                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:14%"  class="col-sm-height editRow"><i class="icon-remove"></i><span class=" btn-xs btn-danger">Delete</span></td>
+                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%"  class="col-sm-height editRow"><i class="icon-remove"></i><span class=" btn-xs btn-danger">Delete</span></td>
 
                             </tr>  
                         </tbody>
@@ -68,8 +68,8 @@ and open the template in the editor.
             </div> 
 
             <div class="row" style="margin:10px">
-                <div class="panel panel-default col-lg-5">
-                    <div class="panel-body">
+                <div class="panel panel-default col-lg-6">
+                    <div class="panel-body"    ng-controller="editRestaurantController">
 
                         <form class="form-horizontal" role="form">
 
@@ -83,14 +83,14 @@ and open the template in the editor.
                             <div class="form-group">
                                 <label for="city" class="col-lg-2 control-label">City</label>
                                 <div class="col-lg-10">
-                                    <input id="address"  ng-model="currentRestaurant.city" type="text" placeholder="City" class="form-control" required="" autocomplete="on">    
+                                    <input id="city"  ng-model="currentRestaurant.city" type="text" placeholder="City" class="form-control" required="" autocomplete="on">    
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="state" class="col-lg-2 control-label">State</label>
                                 <div class="col-lg-4">
-                                    <input id="city"  ng-model="currentRestaurant.state" type="text" placeholder="State" class="form-control" required="">    
+                                    <input id="state"  ng-model="currentRestaurant.state" type="text" placeholder="State" class="form-control" required="">    
                                 </div>
 
                                 <label for="zipCode" class="col-lg-2 control-label">Zip Code</label>
@@ -98,9 +98,18 @@ and open the template in the editor.
                                     <input  class="form-control" ng-model="currentRestaurant.zipCode" id="zipCode" placeholder="Zip Code">
                                 </div>
                             </div>
+                            
                             <div class="form-group">
-                                <button  ng-click="saveClick()" class="btn btn-primary">Save</button>
-                                <button  ng-click="saveClick()" class="btn btn-primary">Cancel</button>
+                                <label for="version"  class="col-lg-2 control-label">Version</label>
+                                <div class="col-lg-5">
+                                    <input id="version"  ng-model="currentRestaurant.version" type="text" placeholder="Version" class="form-control" required="" autocomplete="on">    
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <button  ng-click="saveClick()" class="btn btn-small btn-primary">Save</button>
+                                <button  ng-click="saveClick()" class="btn btn-small  btn-primary">Cancel</button>
                             </div>
                     </div>
                 </div>
@@ -108,7 +117,7 @@ and open the template in the editor.
 
 
 
-                <div class="panel panel-default col-lg-7">
+                <div class="panel panel-default col-lg-6">
                     <div class="panel-body">fred</div>
 
 

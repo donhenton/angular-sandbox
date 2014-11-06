@@ -1,6 +1,6 @@
 (function () {
 
-    var editRestaurantController = function ($scope, $log, listFactory,messageFactory) {
+    var editRestaurantController = function ($scope, $log, restaurantFactory,messageFactory) {
 
         $log.log("in editRestaurant")
         
@@ -8,13 +8,13 @@
         var newRestaurantHandler = function(restaurant)
         {
             
-            $scope.currentRestaurant = listFactory.scatterCurrentRestaurant(); 
+            $scope.currentRestaurant = restaurantFactory.scatterCurrentRestaurant(); 
              
         }
     
         $scope.saveClick = function()
         {
-            listFactory.saveClick($scope.currentRestaurant);
+            restaurantFactory.saveClick($scope.currentRestaurant);
         }
         
         messageFactory.subscribe(newRestaurantHandler,"ON_RESTAURANT_CHANGE");

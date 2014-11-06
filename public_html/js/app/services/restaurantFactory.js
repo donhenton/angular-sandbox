@@ -60,7 +60,10 @@
         factory.loadRestaurant = function(destRestaurant, sourceRestaurant)
         {
             destRestaurant.name = sourceRestaurant.name;
-            destRestaurant.address = sourceRestaurant.address;
+            destRestaurant.zipCode = sourceRestaurant.zipCode;
+            destRestaurant.city = sourceRestaurant.city;
+            destRestaurant.state = sourceRestaurant.state;
+            destRestaurant.version = sourceRestaurant.version;
             destRestaurant.is_current = sourceRestaurant.is_current;
             destRestaurant.id = sourceRestaurant.id;
         }
