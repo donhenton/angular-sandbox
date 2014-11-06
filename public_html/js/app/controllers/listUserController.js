@@ -1,6 +1,6 @@
 (function () {
 
-    var listUserController = function ($scope, $log, listFactory) {
+    var listUserController = function ($scope, $log, listFactory,messageFactory) {
 
         $log.log("in list");
 
@@ -11,7 +11,7 @@
         {
 
             listFactory.setCurrentUser(user);
-            
+            messageFactory.raiseEvent(user,"ON_USER_CHANGE");
            
         };
 
@@ -25,12 +25,11 @@
 
     }
 
-    listUserController.$inject = ['$scope', '$log', 'listFactory'];
+    listUserController.$inject = ['$scope', '$log', 'listFactory','messageFactory'];
     angular.module('listApp')
             .controller('listUserController', listUserController);
     
-    angular.module('listApp')
-            .controller('editUserController');
+    
     
      
 

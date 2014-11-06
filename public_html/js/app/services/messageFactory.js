@@ -19,14 +19,14 @@
  */
 
 (function () {
-    var messageFactory = function ($log,listFactory)
+    var messageFactory = function ($log)
     {
         
         return messagePump;
 
     };
 
-    messageFactory.$inject = ['$log','listFactory'];
+    messageFactory.$inject = ['$log'];
 
     angular.module('listApp').factory('messageFactory', messageFactory);
 

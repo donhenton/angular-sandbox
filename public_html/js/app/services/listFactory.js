@@ -10,10 +10,10 @@
 
         var factory = {};
         factory.userList = null;
-        factory.callThisOnUserChange = null;
+       // factory.callThisOnUserChange = null;
         factory.currentUser = {'name': '', 'address': '', 'id': 0, is_current: false};
         factory.userListIndex = {} // list of users by id
-        $log.log("m "+messageFactory);
+       // $log.log("m "+messageFactory);
  
         factory.resetCurrentStatus = function ()
         {
@@ -28,7 +28,7 @@
             this.resetCurrentStatus();
             user.is_current = true;
             factory.currentUser = user;
-            factory.callThisOnUserChange(user);
+           // factory.callThisOnUserChange(user);
 
         };
 

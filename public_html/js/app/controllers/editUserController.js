@@ -1,8 +1,9 @@
 (function () {
 
-    var editUserController = function ($scope, $log, listFactory) {
+    var editUserController = function ($scope, $log, listFactory,messageFactory) {
 
         $log.log("in edituser")
+        
         
         var nameChangeHandler = function(u )
         {
@@ -11,16 +12,17 @@
             $scope.currentUser = listFactory.scatterCurrentUser(); 
             $log.log("called name change handler "+u.name)
         }
-        listFactory.callThisOnUserChange = nameChangeHandler;
+       // listFactory.callThisOnUserChange = nameChangeHandler;
        // listFactory.setOnUserChange(nameChangeHandler);
         $scope.saveClick = function()
         {
             listFactory.saveClick($scope.currentUser);
         }
-
+        
+        messageFactory.subscribe(nameChangeHandler,"ON_USER_CHANGE");
     }
 
-    editUserController.$inject = ['$scope', '$log', 'listFactory'];
+    editUserController.$inject = ['$scope', '$log', 'listFactory','messageFactory'];
     angular.module('listApp')
             .controller('editUserController', editUserController);
     
