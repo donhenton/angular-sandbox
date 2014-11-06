@@ -1,24 +1,24 @@
 (function () {
 
-    var listRestaurantController = function ($scope, $log, listFactory,messageFactory) {
+    var listRestaurantController = function ($scope, $log, restaurantFactory,messageFactory) {
 
         $log.log("in list");
 
-        $scope.restaurantList = listFactory.restaurantList;
+        $scope.restaurantList = restaurantFactory.restaurantList;
          
 
         $scope.changeRestaurant = function (event, restaurant)
         {
 
-            listFactory.setCurrentRestaurant(restaurant);
+            restaurantFactory.setCurrentRestaurant(restaurant);
             messageFactory.raiseEvent(restaurant,"ON_RESTAURANT_CHANGE");
            
         };
 
         $scope.currentRowIndicator = function (restaurant)
         {
-
-            return listFactory.getCurrentRowCSS(restaurant);
+            $log.log("in current row indicator for controller")
+            return restaurantFactory.getCurrentRowCSS(restaurant);
         };
 
          
