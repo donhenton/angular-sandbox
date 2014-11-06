@@ -13,7 +13,33 @@ tr.currentUserRow
      
 }
 
+li 
+        {
+            margin: 5px
+        }
 
+        .ptrClass {cursor:pointer }
+
+        body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+                padding-left:50px;
+            }
+        td { margin: 3px; padding: 3px}
+        /*.selectedRow {background-color: #a47e3c;color:white}*/
+        .selectedRow {background-color: #0044cc; color:whitesmoke }
+        .editRow {  cursor:pointer }
+        .tableHeader
+        {
+
+            font-size: 20px;
+            font-weight: normal;
+
+            color: white;
+            padding: 4px 4px 4px 4px;
+            margin: 5px;
+
+        }
 
 
 

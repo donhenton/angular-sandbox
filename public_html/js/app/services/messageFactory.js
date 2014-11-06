@@ -10,6 +10,6 @@
 
     messageFactory.$inject = ['$log'];
 
-    angular.module('listApp').factory('messageFactory', messageFactory);
+    angular.module('restaurantApp').factory('messageFactory', messageFactory);
 
 }());
