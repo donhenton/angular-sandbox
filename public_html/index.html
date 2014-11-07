@@ -56,7 +56,7 @@ and open the template in the editor.
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%" class="col-sm-height editRow">{{restaurant.state}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%" class="col-sm-height editRow">{{restaurant.zipCode}}</td>
                                 <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:10%"  class="col-sm-height editRow">{{restaurant.version}}</td>
-                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%"  class="col-sm-height editRow"><span class=" btn-xs btn-danger"><i class="glyphicon glyphicon-remove g"></i> Delete</span></td>
+                                <td   ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"  style="width:15%"  class="col-sm-height editRow"><span class=" btn-xs btn-danger" style="padding: 5px"><i class="glyphicon glyphicon-remove g"></i> Delete</span></td>
 
                             </tr>  
                         </tbody>
@@ -125,10 +125,10 @@ and open the template in the editor.
                 <div class="col-lg-6">
                     <div><h4 style="display: inline-block">Reviews</h4></div>
                     <div ng-controller="reviewController">
-                         
+
                         <ul>
-                        <li ng-repeat="review in currentReviews">
-                            {{review.reviewListing}} ({{review.starRating}} <span class="glyphicon glyphicon-star"></span> s)</li>
+                            <li ng-repeat="review in currentReviews">
+                                {{review.reviewListing}} ({{review.starRating}} <span class="glyphicon glyphicon-star"></span> s)</li>
                         </ul>
                     </div>
 
