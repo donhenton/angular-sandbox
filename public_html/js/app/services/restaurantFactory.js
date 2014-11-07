@@ -9,15 +9,15 @@
     var restaurantFactory = function ($log,messageFactory,restaurantDAOService) {
 
         var factory = {};
-        factory.restaurantList = null;
-        factory.currentRestaurant =  {};
-        factory.restaurantListIndex = {} // list of restaurants by id
+        var restaurantList = null;
+        var currentRestaurant =  {};
+        var restaurantListIndex = {} // list of restaurants by id
         
  
         factory.resetCurrentStatus = function ()
         {
 
-            this.restaurantList.forEach(function (restaurant)
+            restaurantList.forEach(function (restaurant)
             {
                 restaurant.is_current = false;
             });
@@ -26,7 +26,7 @@
         {
             this.resetCurrentStatus();
             restaurant.is_current = true;
-            factory.currentRestaurant = restaurant;
+            currentRestaurant = restaurant;
             messageFactory.raiseEvent(restaurant,"ON_RESTAURANT_CHANGE");
 
         };
@@ -45,13 +45,13 @@
         factory.gatherRestaurant = function (restaurant)
         {
            
-            this.loadRestaurant(this.currentRestaurant,restaurant);
+            this.loadRestaurant( currentRestaurant,restaurant);
         };
 
         factory.scatterCurrentRestaurant = function ()
         {
             var destRestaurant = {};
-            var sourceRestaurant = this.currentRestaurant;
+            var sourceRestaurant =  currentRestaurant;
             this.loadRestaurant(destRestaurant, sourceRestaurant);
             return destRestaurant;
         };
@@ -84,7 +84,7 @@
         {
             if (this.currentRestaurant.id > 0)
             {
-                var lookup = factory.restaurantListIndex[newRestaurant.id];
+                var lookup =  restaurantListIndex[newRestaurant.id];
                 this.loadRestaurant(lookup, newRestaurant);
 
             }
@@ -101,15 +101,20 @@
         //this would be a service call
         factory.getRestaurantList = function ()
         {
-            
-            this.restaurantList = restaurantDAOService.getAllRestaurants();
+            if (restaurantList === null)
+            {
+                restaurantList = restaurantDAOService.getAllRestaurants();
+            }
+             
+             
+             return restaurantList;
         };
         //init the system
         factory.setUpRestaurantList = function ()
         {
-            this.restaurantList.forEach(function (restaurant)
+            restaurantList.forEach(function (restaurant)
             {
-                factory.restaurantListIndex[restaurant.id] = restaurant;
+                 restaurantListIndex[restaurant.id] = restaurant;
 
 
             });

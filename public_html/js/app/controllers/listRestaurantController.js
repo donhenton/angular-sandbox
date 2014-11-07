@@ -4,7 +4,7 @@
 
         $log.log("in list");
 
-        $scope.restaurantList = restaurantFactory.restaurantList;
+        $scope.restaurantList = restaurantFactory.getRestaurantList();
          
 
         $scope.changeRestaurant = function (event, restaurant)
