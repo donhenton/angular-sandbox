@@ -125,7 +125,10 @@ and open the template in the editor.
                 <div class="col-lg-6">
                     <div><h4 style="display: inline-block">Reviews</h4></div>
                     <div ng-controller="reviewController">
-                        {{currentReviews}}
+                         
+                        <ul></ul>
+                        <li ng-repeat="review in currentReviews">
+                            {{review.reviewListing}} ({{review.starRating}} <span class="glyphicon glyphicon-star"></span> s)</li>
                         
                     </div>
 

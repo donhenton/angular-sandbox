@@ -6,14 +6,14 @@
 
 
 (function () {
-    var restaurantFactory = function ($log,messageFactory,restaurantDAOService) {
+    var restaurantFactory = function ($log, messageFactory, restaurantDAOService) {
 
         var factory = {};
         var restaurantList = null;
-        var currentRestaurant =  {};
+        var currentRestaurant = {};
         var restaurantListIndex = {} // list of restaurants by id
-        
- 
+
+
         factory.resetCurrentStatus = function ()
         {
 
@@ -27,7 +27,7 @@
             this.resetCurrentStatus();
             restaurant.is_current = true;
             currentRestaurant = restaurant;
-            messageFactory.raiseEvent(restaurant,"ON_RESTAURANT_CHANGE");
+            messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
 
         };
 
@@ -44,19 +44,19 @@
 
         factory.gatherRestaurant = function (restaurant)
         {
-           
-            this.loadRestaurant( currentRestaurant,restaurant);
+
+            this.loadRestaurant(currentRestaurant, restaurant);
         };
 
         factory.scatterCurrentRestaurant = function ()
         {
             var destRestaurant = {};
-            var sourceRestaurant =  currentRestaurant;
-            this.loadRestaurant(destRestaurant, sourceRestaurant);
+            var sourceRestaurant = currentRestaurant;
+            loadRestaurant(destRestaurant, sourceRestaurant);
             return destRestaurant;
         };
 
-        factory.loadRestaurant = function(destRestaurant, sourceRestaurant)
+        loadRestaurant = function (destRestaurant, sourceRestaurant)
         {
             destRestaurant.name = sourceRestaurant.name;
             destRestaurant.zipCode = sourceRestaurant.zipCode;
@@ -66,8 +66,8 @@
             destRestaurant.is_current = sourceRestaurant.is_current;
             destRestaurant.id = sourceRestaurant.id;
         }
-        
-         factory.createEmptyRestaurant = function()
+
+        factory.createEmptyRestaurant = function ()
         {
             var destRestaurant = {};
             destRestaurant.name = "";
@@ -84,7 +84,7 @@
         {
             if (this.currentRestaurant.id > 0)
             {
-                var lookup =  restaurantListIndex[newRestaurant.id];
+                var lookup = restaurantListIndex[newRestaurant.id];
                 this.loadRestaurant(lookup, newRestaurant);
 
             }
@@ -92,10 +92,10 @@
 
         factory.cancelClick = function ( )
         {
-             var res = factory.createEmptyRestaurant();
-             factory.setCurrentRestaurant(res);
-             messageFactory.raiseEvent(restaurant,"ON_RESTAURANT_CHANGE");
-             return res;
+            var res = factory.createEmptyRestaurant();
+            factory.setCurrentRestaurant(res);
+            messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
+            return res;
         };
 
         //this would be a service call
@@ -105,16 +105,16 @@
             {
                 restaurantList = restaurantDAOService.getAllRestaurants();
             }
-             
-             
-             return restaurantList;
+
+
+            return restaurantList;
         };
         //init the system
         factory.setUpRestaurantList = function ()
         {
             restaurantList.forEach(function (restaurant)
             {
-                 restaurantListIndex[restaurant.id] = restaurant;
+                restaurantListIndex[restaurant.id] = restaurant;
 
 
             });
@@ -128,7 +128,7 @@
         return factory;
     };
 
-    restaurantFactory.$inject = ['$log','messageFactory','restaurantDAOService'];
+    restaurantFactory.$inject = ['$log', 'messageFactory', 'restaurantDAOService'];
 
     angular.module('restaurantApp').factory('restaurantFactory', restaurantFactory);
 

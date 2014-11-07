@@ -10,8 +10,7 @@
             
             reviewFactory.changeRestaurant(restaurant);
             $scope.currentReviews =  reviewFactory.scatterCurrentReviews();
-             
-
+   
         }
 
         messageFactory.subscribe(newRestaurantHandler,"ON_RESTAURANT_CHANGE");
