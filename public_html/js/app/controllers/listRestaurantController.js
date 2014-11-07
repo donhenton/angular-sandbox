@@ -10,17 +10,11 @@
         $scope.changeRestaurant = function (event, restaurant)
         {
 
-            restaurantFactory.setCurrentRestaurant(restaurant);
+            restaurantFactory.changeRestaurant(restaurant);
            
         };
 
-        $scope.currentRowIndicator = function (restaurant)
-        {
-            $log.log("in current row indicator for controller")
-            return restaurantFactory.getCurrentRowCSS(restaurant);
-        };
-
-         
+            
 
     }
 

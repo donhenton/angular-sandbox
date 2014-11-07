@@ -124,7 +124,10 @@ and open the template in the editor.
 
                 <div class="col-lg-6">
                     <div><h4 style="display: inline-block">Reviews</h4></div>
-
+                    <div ng-controller="reviewController">
+                        {{currentReviews}}
+                        
+                    </div>
 
                 </div>
             </div>
@@ -135,9 +138,12 @@ and open the template in the editor.
         <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
         <script src="js/app/app.js" type="text/javascript"></script>
         <script src="js/app/messagePump.js" type="text/javascript"></script>
+        <script src="js/app/services/restaurantDAOService.js" type="text/javascript"></script>
         <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
+        <script src="js/app/services/reviewFactory.js" type="text/javascript"></script>
         <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
         <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
         <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
+        <script src="js/app/controllers/reviewController.js" type="text/javascript"></script>
     </body>
 </html>

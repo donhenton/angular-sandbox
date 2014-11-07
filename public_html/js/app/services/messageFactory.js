@@ -1,4 +1,9 @@
-
+/**
+ * 
+ * create an angular messageFactory
+ * 
+ * @returns {undefined}
+ */
 
 (function () {
     var messageFactory = function ($log)

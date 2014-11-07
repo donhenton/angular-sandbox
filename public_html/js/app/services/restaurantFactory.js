@@ -1,19 +1,18 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * the factory that handles restaurant business logic
+ * 
  */
 
 
 (function () {
-    var restaurantFactory = function ($log,messageFactory) {
+    var restaurantFactory = function ($log,messageFactory,restaurantDAOService) {
 
         var factory = {};
         factory.restaurantList = null;
-       // factory.callThisOnRestaurantChange = null;
         factory.currentRestaurant =  {};
         factory.restaurantListIndex = {} // list of restaurants by id
-       // $log.log("m "+messageFactory);
+        
  
         factory.resetCurrentStatus = function ()
         {
@@ -23,7 +22,7 @@
                 restaurant.is_current = false;
             });
         };
-        factory.setCurrentRestaurant = function (restaurant)
+        factory.changeRestaurant = function (restaurant)
         {
             this.resetCurrentStatus();
             restaurant.is_current = true;
@@ -103,7 +102,7 @@
         factory.getRestaurantList = function ()
         {
             
-            this.restaurantList = g_restaurantData;
+            this.restaurantList = restaurantDAOService.getAllRestaurants();
         };
         //init the system
         factory.setUpRestaurantList = function ()
@@ -124,7 +123,7 @@
         return factory;
     };
 
-    restaurantFactory.$inject = ['$log','messageFactory'];
+    restaurantFactory.$inject = ['$log','messageFactory','restaurantDAOService'];
 
     angular.module('restaurantApp').factory('restaurantFactory', restaurantFactory);
 
