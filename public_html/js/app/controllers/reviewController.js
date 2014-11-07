@@ -15,6 +15,11 @@
 
         messageFactory.subscribe(newRestaurantHandler,"ON_RESTAURANT_CHANGE");
         
+        $scope.editReview = function(review)
+        {
+            review.isEditing=true;
+        }
+        
     }
     reviewController.$inject = ['$scope', '$log', 'reviewFactory', 'messageFactory','restaurantFactory'];
     angular.module('restaurantApp')
