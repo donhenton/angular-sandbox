@@ -11,13 +11,14 @@
         var factory = {};
         var restaurantList = null;
         var currentRestaurant = {};
+        var currentRestaurantBackup = {};
        
 
         factory.deleteRestaurant = function(restaurant)
         {
             restaurantDAOService.deleteRestaurant(restaurant);
-            this.currentRestaurant = this.createEmptyRestaurant();
-            messageFactory.raiseEvent(this.currentRestaurant, "ON_RESTAURANT_DELETE");
+            currentRestaurant = this.createEmptyRestaurant();
+            messageFactory.raiseEvent(currentRestaurant, "ON_RESTAURANT_DELETE");
         };
         factory.resetCurrentStatus = function ()
         {
@@ -31,19 +32,10 @@
         {
             this.resetCurrentStatus();
             restaurant.is_current = true;
-            this.currentRestaurant = restaurant;
+            currentRestaurant = restaurant;
+            this.getRestaurantList();
             messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
-
-        };
-
-        factory.getCurrentRowCSS = function (restaurant)
-        {
-
-            if (restaurant.is_current)
-                return "currentRestaurantRow";
-            else
-                return null;
-
+            currentRestaurantBackup =factory.scatterCurrentRestaurant();
 
         };
 
@@ -56,7 +48,7 @@
         factory.scatterCurrentRestaurant = function ()
         {
             var destRestaurant = {};
-            var sourceRestaurant = this.currentRestaurant;
+            var sourceRestaurant = currentRestaurant;
             restaurantDAOService.loadRestaurant(destRestaurant, sourceRestaurant);
             return destRestaurant;
         };
@@ -78,24 +70,23 @@
 
         factory.saveClick = function (newRestaurant)
         {
-            if (this.currentRestaurant.id > 0)
+            if (currentRestaurant.id > 0)
             {
-                //TODO 
-                restaurantDAOService.saveRestaurant(newRestaurant);
-               // var lookup = restaurantDAOService.getRestaurantById(newRestaurant.id);
-               // restaurantDAOService.loadRestaurant(lookup, newRestaurant);
+              
+              restaurantDAOService.saveRestaurant(newRestaurant);
+              restaurantList = restaurantDAOService.getAllRestaurants();
 
             }
         };
 
-        factory.cancelClick = function ( )
+        factory.backup = function()
         {
-            var res = factory.createEmptyRestaurant();
-            factory.setCurrentRestaurant(res);
-            messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
-            return res;
-        };
-
+            currentRestaurantBackup = factory.scatterCurrentRestaurant();
+        }
+        factory.restore = function()
+        {
+            return currentRestaurantBackup;
+        }
         //this would be a service call
         factory.getRestaurantList = function ()
         {
