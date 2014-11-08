@@ -8,12 +8,21 @@ http://jsfiddle.net/drueter/yqgB5/16/
 
 fixed header tables
    ========================================================================== */
-
+.restaurantContainer .errorPanel
+{
+    height: 25px ;
+     
+    color: red;
+    font-weight:bold;
+    font-style: italic;
+    padding:2px;
+    margin-top:5px;
+}
 
 .restaurantContainer  .reviewContainer .reviewRow
  {
-      margin: 4px;
-      padding:4px;
+      margin: 2px;
+      padding:2px;
       font-weight:bolder;
      
  }
@@ -22,6 +31,11 @@ fixed header tables
  {
   
  }
+ 
+ [ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+ 
 
 .ptrClass {cursor:pointer }
 

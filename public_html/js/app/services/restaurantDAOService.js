@@ -14,10 +14,17 @@
 
         };
 
+        /**
+         * 
+         * @param {type} newRestaurant
+         * @returns a string with error message or null
+         */
         daoService.saveRestaurant = function (newRestaurant)
         {
+            var errorMessage = null;
             var lookup = daoService.getRestaurantById(newRestaurant.id);
             daoService.loadRestaurant(lookup, newRestaurant);
+            return errorMessage;
         };
 
         daoService.loadRestaurant = function (destRestaurant, sourceRestaurant)
@@ -39,6 +46,17 @@
         {
             return g_restaurantData;
         };
+        /**
+         * 
+         * @param {type} newRestaurant
+         * @returns a string with error message or null
+         */
+        daoService.addRestaurant = function (r)
+        {
+            var errorMessage = null;
+            this.getAllRestaurants().unshift(r);
+            return errorMessage;
+        }
 
         daoService.deleteRestaurant = function (restaurant)
         {
@@ -46,10 +64,10 @@
             //
             //splice it out
             //setUpRestaurantList();
-
+            var errorMessage = null;
             var idx = -1;
-            var resCollection =  this.getAllRestaurants() ;
-            for(i=0;i<resCollection.length;i++)
+            var resCollection = this.getAllRestaurants();
+            for (i = 0; i < resCollection.length; i++)
             {
                 if (resCollection[i].id === restaurant.id)
                 {
@@ -59,7 +77,7 @@
             }
             if (idx > -1)
             {
-                resCollection.splice(idx,1);
+                resCollection.splice(idx, 1);
                 setUpRestaurantList();
             }
 
