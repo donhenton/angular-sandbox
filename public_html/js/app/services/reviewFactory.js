@@ -6,7 +6,7 @@
 
 
 (function () {
-    var reviewFactory = function ($log, messageFactory, restaurantDAOService) {
+    var reviewFactory = function ($log, messageFactory, restaurantDAOService,reviewDAOService) {
 
         var factory = {};
         var currentRestaurant = null;
@@ -33,7 +33,13 @@
         factory.scatterCurrentReviews = function ()
         {
             var scatteredReviews = [];
-
+             
+            if (this.currentRestaurant == null)
+            {
+               $log.log("current res null in reviewFactory")
+                return [];
+            }
+            
             this.currentRestaurant.reviewDTOs.forEach(function(rev)
                 {
                     var newRev = {};
@@ -49,7 +55,7 @@
         return factory;
     };
 
-    reviewFactory.$inject = ['$log', 'messageFactory', 'restaurantDAOService'];
+    reviewFactory.$inject = ['$log', 'messageFactory', 'restaurantDAOService','reviewDAOService'];
 
     angular.module('restaurantApp').factory('reviewFactory', reviewFactory);
 

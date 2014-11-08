@@ -9,7 +9,10 @@
            return g_restaurantData;
         }
 
- 
+        daoService.deleteRestaurant = function(restaurant)
+        {
+            
+        }
 
         return daoService;
     };

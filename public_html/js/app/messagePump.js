@@ -32,7 +32,7 @@ var messagePump =
              * @param eventType the event to associate
              */
             subscribe: function (fn, eventType) {
-                console.log('subscribe '+eventType)
+               // console.log('subscribe '+eventType)
                 eventType = eventType || 'any';
                 if (typeof this.subscribers[eventType] === "undefined") {
                     // this notation is an alterative way of reaching properties 
@@ -60,7 +60,7 @@ var messagePump =
              * 
              */
             raiseEvent: function (messagePayload, eventType) {
-                console.log('raiseEvent '+eventType)
+                 console.log('raiseEvent '+eventType)
                 this.visitSubscribers('raiseEvent', messagePayload, eventType);
             },
             visitSubscribers: function (action, arg, type) {

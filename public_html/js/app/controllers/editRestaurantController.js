@@ -1,16 +1,14 @@
 (function () {
 
     var editRestaurantController = function ($scope, $log, restaurantFactory,messageFactory) {
-
-        $log.log("in editRestaurant")
-        
-        
+      
         var newRestaurantHandler = function(restaurant)
         {
             
             $scope.currentRestaurant = restaurantFactory.scatterCurrentRestaurant(); 
              
         }
+        
         
         $scope.cancelClick = function()
         {
@@ -23,6 +21,7 @@
         }
         
         messageFactory.subscribe(newRestaurantHandler,"ON_RESTAURANT_CHANGE");
+        messageFactory.subscribe(newRestaurantHandler,"ON_RESTAURANT_DELETE");
     }
 
     editRestaurantController.$inject = ['$scope', '$log', 'restaurantFactory','messageFactory'];

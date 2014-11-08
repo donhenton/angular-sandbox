@@ -13,7 +13,12 @@
         var currentRestaurant = {};
         var restaurantListIndex = {} // list of restaurants by id
 
-
+        factory.deleteRestaurant = function(restaurant)
+        {
+            restaurantDAOService.deleteRestaurant(restaurant);
+            this.currentRestaurant = this.createEmptyRestaurant();
+            messageFactory.raiseEvent(this.currentRestaurant, "ON_RESTAURANT_DELETE");
+        };
         factory.resetCurrentStatus = function ()
         {
 
@@ -26,7 +31,7 @@
         {
             this.resetCurrentStatus();
             restaurant.is_current = true;
-            currentRestaurant = restaurant;
+            this.currentRestaurant = restaurant;
             messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
 
         };
@@ -51,7 +56,7 @@
         factory.scatterCurrentRestaurant = function ()
         {
             var destRestaurant = {};
-            var sourceRestaurant = currentRestaurant;
+            var sourceRestaurant = this.currentRestaurant;
             loadRestaurant(destRestaurant, sourceRestaurant);
             return destRestaurant;
         };
