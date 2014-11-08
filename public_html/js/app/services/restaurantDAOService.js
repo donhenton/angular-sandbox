@@ -10,6 +10,10 @@
             daoService.getAllRestaurants().forEach(function (restaurant)
             {
                 restaurantListIndex[restaurant.id] = restaurant;
+                if (typeof restaurant.reviewDTOS == 'undefined')
+                {
+                    restaurant.reviewDTOS = []; 
+                }
             });
 
         };
@@ -55,6 +59,7 @@
         {
             var errorMessage = null;
             this.getAllRestaurants().unshift(r);
+            r.reviewDTOs = [];
             return errorMessage;
         }
 
