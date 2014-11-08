@@ -10,9 +10,18 @@ fixed header tables
    ========================================================================== */
 
 
-
+.restaurantContainer  .reviewContainer .reviewRow
+ {
+      margin-bottom: 3px;
+      padding:4px;
+      font-weight:bolder;
+     
+ }
  
- 
+ .restaurantContainer  .reviewContainer .editingReview
+ {
+     border:thin solid #3a87ad;
+ }
 
 .ptrClass {cursor:pointer }
 
