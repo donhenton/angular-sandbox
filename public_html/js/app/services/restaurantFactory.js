@@ -50,27 +50,18 @@
         factory.gatherRestaurant = function (restaurant)
         {
 
-            this.loadRestaurant(currentRestaurant, restaurant);
+            restaurantDAOService.loadRestaurant(currentRestaurant, restaurant);
         };
 
         factory.scatterCurrentRestaurant = function ()
         {
             var destRestaurant = {};
             var sourceRestaurant = this.currentRestaurant;
-            loadRestaurant(destRestaurant, sourceRestaurant);
+            restaurantDAOService.loadRestaurant(destRestaurant, sourceRestaurant);
             return destRestaurant;
         };
 
-        var loadRestaurant = function (destRestaurant, sourceRestaurant)
-        {
-            destRestaurant.name = sourceRestaurant.name;
-            destRestaurant.zipCode = sourceRestaurant.zipCode;
-            destRestaurant.city = sourceRestaurant.city;
-            destRestaurant.state = sourceRestaurant.state;
-            destRestaurant.version = sourceRestaurant.version;
-            destRestaurant.is_current = sourceRestaurant.is_current;
-            destRestaurant.id = sourceRestaurant.id;
-        }
+       
 
         factory.createEmptyRestaurant = function ()
         {
@@ -89,10 +80,10 @@
         {
             if (this.currentRestaurant.id > 0)
             {
-               
-                var lookup = restaurantDAOService.getRestaurantById(newRestaurant.id);
-                console.debug("xxx "+lookup.name+" ")
-                loadRestaurant(lookup, newRestaurant);
+                //TODO 
+                restaurantDAOService.saveRestaurant(newRestaurant);
+               // var lookup = restaurantDAOService.getRestaurantById(newRestaurant.id);
+               // restaurantDAOService.loadRestaurant(lookup, newRestaurant);
 
             }
         };

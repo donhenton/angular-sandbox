@@ -27,24 +27,25 @@
 
         factory.changeRestaurant = function (restaurant)
         {
-            this.currentRestaurant = restaurant;
+            currentRestaurant = restaurant;
         }
 
         factory.scatterCurrentReviews = function ()
         {
             var scatteredReviews = [];
              
-            if (this.currentRestaurant == null)
+            if (currentRestaurant == null)
             {
                $log.log("current res null in reviewFactory")
                 return [];
             }
             
-            this.currentRestaurant.reviewDTOs.forEach(function(rev)
+             currentRestaurant.reviewDTOs.forEach(function(rev)
                 {
                     var newRev = {};
-                    new
+                     
                     transferReview(rev,newRev);
+                    newRev.parentRestaurantId = currentRestaurant.id
                     scatteredReviews.push(newRev);
                 }
             )

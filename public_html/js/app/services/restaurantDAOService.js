@@ -3,20 +3,34 @@
     var restaurantDAOService = function ($log) {
 
         var daoService = {};
-        var restaurantListIndex = {}
-        
+        var restaurantListIndex = {};  
         var setUpRestaurantList = function ()
         {
-             
             restaurantListIndex = {}
             daoService.getAllRestaurants().forEach(function (restaurant)
             {
                 restaurantListIndex[restaurant.id] = restaurant;
-
-
             });
 
         };
+    
+        daoService.saveRestaurant = function(newRestaurant)
+        {
+                var lookup = daoService.getRestaurantById(newRestaurant.id);
+                daoService.loadRestaurant(lookup, newRestaurant);
+        };
+        
+        daoService.loadRestaurant = function (destRestaurant, sourceRestaurant)
+        {
+            destRestaurant.name = sourceRestaurant.name;
+            destRestaurant.zipCode = sourceRestaurant.zipCode;
+            destRestaurant.city = sourceRestaurant.city;
+            destRestaurant.state = sourceRestaurant.state;
+            destRestaurant.version = sourceRestaurant.version;
+            destRestaurant.is_current = sourceRestaurant.is_current;
+            destRestaurant.id = sourceRestaurant.id;
+        }
+        
         daoService.getRestaurantById = function(id)
         {
             return restaurantListIndex[id];
@@ -28,6 +42,9 @@
 
         daoService.deleteRestaurant = function(restaurant)
         {
+            //locate the restaurant by walking the array
+            //splice it out
+            //setUpRestaurantList();
             
         }
         setUpRestaurantList();
