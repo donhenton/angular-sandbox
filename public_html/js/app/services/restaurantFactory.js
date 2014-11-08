@@ -11,7 +11,7 @@
         var factory = {};
         var restaurantList = null;
         var currentRestaurant = {};
-        var restaurantListIndex = {} // list of restaurants by id
+       
 
         factory.deleteRestaurant = function(restaurant)
         {
@@ -61,7 +61,7 @@
             return destRestaurant;
         };
 
-        loadRestaurant = function (destRestaurant, sourceRestaurant)
+        var loadRestaurant = function (destRestaurant, sourceRestaurant)
         {
             destRestaurant.name = sourceRestaurant.name;
             destRestaurant.zipCode = sourceRestaurant.zipCode;
@@ -89,8 +89,10 @@
         {
             if (this.currentRestaurant.id > 0)
             {
-                var lookup = restaurantListIndex[newRestaurant.id];
-                this.loadRestaurant(lookup, newRestaurant);
+               
+                var lookup = restaurantDAOService.getRestaurantById(newRestaurant.id);
+                console.debug("xxx "+lookup.name+" ")
+                loadRestaurant(lookup, newRestaurant);
 
             }
         };
@@ -114,20 +116,10 @@
 
             return restaurantList;
         };
-        //init the system
-        factory.setUpRestaurantList = function ()
-        {
-            restaurantList.forEach(function (restaurant)
-            {
-                restaurantListIndex[restaurant.id] = restaurant;
-
-
-            });
-
-        };
+ 
 
         factory.getRestaurantList();
-        factory.setUpRestaurantList();
+ //       factory.setUpRestaurantList();
 
 
         return factory;
