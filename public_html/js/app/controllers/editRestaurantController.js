@@ -4,6 +4,11 @@
 
         $scope.recordPresent = false;
         $scope.canAdd = true;
+        var resetForm = function ()
+        {
+            messageFactory.raiseEvent("", "ON_ERROR");
+            $scope.editRestaurantForm.$setPristine();
+        }
         var newRestaurantHandler = function (restaurant)
         {
 
@@ -14,6 +19,7 @@
         $scope.addNewRestaurant = function ()
         {
             $scope.currentRestaurant = restaurantFactory.createEmptyRestaurant();
+            resetForm();
             $scope.recordPresent = true;
             $scope.canAdd = false;
         }
@@ -27,8 +33,8 @@
 
         $scope.cancelClick = function ()
         {
-           // $log.log("model con " + $scope.editRestaurantForm.name.$dirty)
-           // $log.log("ngForm " + $scope.editRestaurantForm.$valid)
+            // $log.log("model con " + $scope.editRestaurantForm.name.$dirty)
+            // $log.log("ngForm " + $scope.editRestaurantForm.$valid)
             if (typeof $scope.currentRestaurant.id === 'undefined'
                     || $scope.currentRestaurant.id == 0)
             {
@@ -42,25 +48,53 @@
                 $scope.currentRestaurant = restaurantFactory.scatterCurrentRestaurant();
 
             }
-            $scope.editRestaurantForm.$setPristine();            
+            resetForm();
             $scope.canAdd = true;
-            messageFactory.raiseEvent("", "ON_ERROR");
+
         }
 
         $scope.saveClick = function ()
         {
-
-            var success = restaurantFactory.saveRestaurant($scope.currentRestaurant);
-            if (success)
+            var errorMessage = null;
+           // console.log("save click 1")
+            if (!$scope.editRestaurantForm.$valid)
             {
-                $scope.canAdd = true;
-                $scope.recordPresent = false;
+                //console.log("save click 2")
+                if ($scope.editRestaurantForm.zipCode.$error.pattern)
+                {
+                    errorMessage = "zip code must be a number"
+                }
+
+                if ($scope.editRestaurantForm.state.$error.pattern)
+                {
+                    errorMessage = "state must be a two letter combination, uppercase";    
+                }
+
+            }
+
+             //console.log("save click 3 error '"+errorMessage +"'");
+            if (errorMessage !== null)
+            {
+                messageFactory.raiseEvent(errorMessage, "ON_ERROR");
             }
             else
             {
-                //
+                
+                //there's validation in saveRestaurant below, but it will
+                //always pass because of the above validation
+                errorMessage = restaurantFactory.saveRestaurant($scope.currentRestaurant);
+             //   console.log("save click 5 success '"+errorMessage +"'");
+                if (errorMessage === null)
+                {
+                    $scope.canAdd = true;
+                    $scope.recordPresent = false;
+                    resetForm();
+                }
+                else
+                {
+                    messageFactory.raiseEvent(errorMessage, "ON_ERROR");
+                }
             }
-
         }
         messageFactory.subscribe(newRestaurantHandler, "ON_RESTAURANT_CHANGE");
         messageFactory.subscribe(deleteRestaurantHandler, "ON_RESTAURANT_DELETE");

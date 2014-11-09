@@ -14,15 +14,14 @@ fixed header tables
 .restaurantContainer input.ng-valid.ng-dirty{
     border: thin solid green;
 }
-.restaurantContainer .errorPanel
+.restaurantContainer .restaurantErrorPanel
 {
-    height: 25px ;
-
+     
     color: red;
     font-weight:bold;
     font-style: italic;
-    padding:2px;
-    margin-top:5px;
+/*    padding:2px;
+    margin-top:5px;*/
 }
 
 .restaurantContainer  .reviewContainer .reviewRow

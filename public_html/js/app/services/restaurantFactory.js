@@ -78,13 +78,17 @@
         factory.validateRestaurant = function (restaurant)
         {
             var errorMessage = null;
-            if (restaurant.name === null || restaurant.name.trim() === "")
+            if (typeof restaurant.name == 'undefined' || 
+                    restaurant.name === null || restaurant.name.trim() === "")
                 errorMessage = "Name cannot be blank";
-            if (restaurant.zipCode === null || restaurant.zipCode.trim() === "")
+            if (typeof restaurant.zipCode == 'undefined' || 
+                    restaurant.zipCode === null || restaurant.zipCode.trim() === "")
                 errorMessage = "Zip Code cannot be blank";
-            if (restaurant.city === null || restaurant.city.trim() === "")
+            if (typeof restaurant.city == 'undefined' || 
+                    restaurant.city === null || restaurant.city.trim() === "")
                 errorMessage = "City cannot be blank";
-            if (restaurant.state === null || restaurant.state.trim() === "")
+            if (typeof restaurant.state == 'undefined' || 
+                    restaurant.state === null || restaurant.state.trim() === "")
                 errorMessage = "State cannot be blank";
 
             return errorMessage;
@@ -94,11 +98,11 @@
         {
 
             var errorMessage = null;
-            var success = true;
+            
             errorMessage = this.validateRestaurant(newRestaurant);
             if (errorMessage === null)
             {
-                if (currentRestaurant.id > 0)
+                if (newRestaurant.id > 0)
                 {
                     //save mode
                     errorMessage = restaurantDAOService.saveRestaurant(newRestaurant);
@@ -114,12 +118,9 @@
                 restaurantList = restaurantDAOService.getAllRestaurants();
 
             }
-            else
-            {
-                success = false;
-            }
-            messageFactory.raiseEvent(errorMessage, "ON_ERROR");
-            return success;
+             
+            
+            return errorMessage;
 
         };
 
