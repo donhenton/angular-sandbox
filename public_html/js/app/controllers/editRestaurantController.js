@@ -27,26 +27,29 @@
 
         $scope.cancelClick = function ()
         {
-
+           // $log.log("model con " + $scope.editRestaurantForm.name.$dirty)
+           // $log.log("ngForm " + $scope.editRestaurantForm.$valid)
             if (typeof $scope.currentRestaurant.id === 'undefined'
                     || $scope.currentRestaurant.id == 0)
             {
                 //add mode
                 $scope.recordPresent = false;
-                
+
             }
             else
             {
                 restaurantFactory.restore();
                 $scope.currentRestaurant = restaurantFactory.scatterCurrentRestaurant();
-                
+
             }
+            $scope.editRestaurantForm.$setPristine();            
             $scope.canAdd = true;
-            messageFactory.raiseEvent("","ON_ERROR");
+            messageFactory.raiseEvent("", "ON_ERROR");
         }
 
         $scope.saveClick = function ()
         {
+
             var success = restaurantFactory.saveRestaurant($scope.currentRestaurant);
             if (success)
             {

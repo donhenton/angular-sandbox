@@ -8,6 +8,12 @@ http://jsfiddle.net/drueter/yqgB5/16/
 
 fixed header tables
    ========================================================================== */
+.restaurantContainer input.ng-invalid.ng-dirty{
+    border: thin solid red;
+}
+.restaurantContainer input.ng-valid.ng-dirty{
+    border: thin solid green;
+}
 .restaurantContainer .errorPanel
 {
     height: 25px ;
@@ -68,15 +74,15 @@ div.restaurantContainer {
     background-color: #3a87ad; 
     height:25px; 
     padding: 5px ;
-    
+
 }
 
 .restaurantContainer .scrollList
 {
-    
+
     overflow-y: auto;
     height: 200px
-        
+
 }
 
 
@@ -84,5 +90,4 @@ div.restaurantContainer {
 .restaurantContainer  td { margin: 3px; padding: 3px}
 .restaurantContainer.ptrClass {cursor:pointer }
 
-  
-       
+

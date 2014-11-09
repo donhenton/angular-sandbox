@@ -50,6 +50,7 @@
                 </div>
             </div>
             <!-- edit and review container -->
+            <!-- https://docs.angularjs.org/api/ng/directive/input -->
 
             <div class="row">
                 <div class="span12">
@@ -64,29 +65,36 @@
                             <button ng-click="addNewRestaurant()"   class="btn btn-small btn-primary"><i class="icon-pencil icon-white"></i> Add New Restaurant</button>
 
                         </div>
+                        <!-- form validation http://www.ng-newsletter.com/posts/validations.html -->
+                        <div id="formError" style="border: thin solid red">
+                            {{editRestaurantForm.name.$error}}
+                            {{editRestaurantForm.name.$invalid}}
+                            <span class="error" ng-show="editRestaurantForm.name.$invalid">Name Required!</span><br>
 
-                        <form class="form-inline" name="editRestaurantForm"  role="form"  ng-show="recordPresent">
+                        </div>
+
+                        <form class="form-inline" name="editRestaurantForm"  role="form" novalidate ng-show="recordPresent">
                             <label class="control-label" for="name"></label>
                             <div class="controls">
                                 <div class="input-prepend">
                                     <span class="add-on">Name</span>
-                                    <input id="name" name="name" class="input-xlarge" placeholder="Name"   ng-model="currentRestaurant.name" type="text">
+                                    <input required  id="name" name="name" class="input-xlarge" placeholder="Name"   ng-model="currentRestaurant.name" type="text">
                                 </div>
                                 <div class="input-prepend">
                                     <span class="add-on">City</span>
-                                    <input id="city" name="city" class="input-medium" placeholder="City"  ng-model="currentRestaurant.city"  type="text">
+                                    <input  required  id="city" name="city" class="input-medium" placeholder="City"  ng-model="currentRestaurant.city"  type="text">
                                 </div>
                                 <div class="input-prepend">
                                     <span class="add-on">State</span>
-                                    <input id="state" name="city" class="input-small" placeholder="State"   ng-model="currentRestaurant.state" type="text">
+                                    <input required ng-pattern="/[A-Z]/" minlength="2" maxlength="2" id="state" name="city" class="input-small" placeholder="State"   ng-model="currentRestaurant.state" type="text">
                                 </div>
                                 <div class="input-prepend">
                                     <span class="add-on">Zip Code</span>
-                                    <input id="zipCode" name="zipCode" class="input-small" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">
+                                    <input required ng-pattern="/[0-9]/" minlength="5" maxlength="5" id="zipCode" name="zipCode"   class="input-small" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">
                                 </div>
                                 <div class="input-prepend">
                                     <span class="add-on">Version</span>
-                                    <input id="version" name="version" class="input-small" placeholder="Version"   ng-model="currentRestaurant.version" type="text">
+                                    <input required  ng-pattern="/[0-9]/"   id="version" name="version" class="input-small" placeholder="Version"   ng-model="currentRestaurant.version" type="text">
                                 </div>
                             </div>
                             <div  style="margin-top:5px" ng-show="recordPresent">
@@ -97,12 +105,12 @@
                         </form>
 
                     </div><!-- end editRestaurantController -->
-                    
+
                     <div id="reviewController" ng-controller="reviewController" class="span6 pull-right">
                         <h4 style="display: inline-block">Ratings</h4> 
                         <div>
                             <button id="addReviewButton"  class='btn btn-small btn-primary'>
-                            <i class="icon-pencil icon-white"></i> Add Review</button>
+                                <i class="icon-pencil icon-white"></i> Add Review</button>
                         </div>
 
                         <div ng-repeat="review in currentReviews">
