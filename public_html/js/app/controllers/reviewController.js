@@ -10,6 +10,8 @@
              
             reviewFactory.changeRestaurant(restaurant);
             $scope.currentReviews = reviewFactory.scatterCurrentReviews();
+            $scope.isAdding = false;
+            resetReviews(); 
 
         }
 
@@ -18,6 +20,8 @@
 
             reviewFactory.changeRestaurant(null);
             $scope.currentReviews = reviewFactory.scatterCurrentReviews();
+            $scope.isAdding = false;
+            resetReviews(); 
 
         }
         var resetReviews = function ()
