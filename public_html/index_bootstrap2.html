@@ -139,67 +139,68 @@
                                     </button>
                                 </div>
                             </div>
-
-                            <div ng-switch-when="false"  style="margin-bottom:5px">
-                                <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
-                                    <i class="icon-pencil icon-white"></i> Add Review</button>
-                            </div>
-
-                            <!-- end adding new review -->
-
-
-
-                        </div>
-
-                        <div ng-repeat="review in currentReviews">
-                            <div ng-switch="review.isEditing">
-                                <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
-                                    <input style="margin-right:3px"  class="input-xlarge" ng-model="review.reviewListing" type="text">    
-
-
-                                    <select  style="margin-right:2px"  class="input-mini" ng-model="review.starRating" type="text">  
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-
-                                    </select>    <span class="icon-star"></span> s
-                                    <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
-                                        <i class="icon-edit icon-white"></i> 
-                                    </button>
-                                    <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
-                                        <i class="icon-remove icon-white"></i>  
-                                    </button>
+                            <div ng-switch-when="false">
+                                <div style="margin-bottom:5px">
+                                    <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
+                                        <i class="icon-pencil icon-white"></i> Add Review</button>
                                 </div>
-                                <div ng-switch-default  class="reviewRow">
-                                    {{review.reviewListing}} ({{review.starRating}} 
-                                    <span class="icon-star"></span> s) 
+
+                                <!-- end adding new review -->
 
 
-                                    <div style="margin:5px">
-                                        <button  ng-click="editReview(review)" class="btn btn-mini btn-primary"> 
-                                            <i class="icon-edit icon-white"></i> Edit
-                                        </button>
-                                        <button ng-click="deleteReview(review)" class="btn btn-mini btn-danger">
-                                            <i class="icon-remove icon-white"></i> Delete
-                                        </button>
 
+
+
+                                <div ng-repeat="review in currentReviews">
+                                    <div ng-switch="review.isEditing">
+                                        <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
+                                            <input style="margin-right:3px"  class="input-xlarge" ng-model="review.reviewListing" type="text">    
+
+
+                                            <select  style="margin-right:2px"  class="input-mini" ng-model="review.starRating" type="text">  
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                                <option>13</option>
+
+                                            </select>    <span class="icon-star"></span> s
+                                            <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
+                                                <i class="icon-edit icon-white"></i> 
+                                            </button>
+                                            <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
+                                                <i class="icon-remove icon-white"></i>  
+                                            </button>
+                                        </div>
+                                        <div ng-switch-default  class="reviewRow">
+                                            {{review.reviewListing}} ({{review.starRating}} 
+                                            <span class="icon-star"></span> s) 
+
+
+                                            <div style="margin:5px">
+                                                <button  ng-click="editReview(review)" class="btn btn-mini btn-primary"> 
+                                                    <i class="icon-edit icon-white"></i> Edit
+                                                </button>
+                                                <button ng-click="deleteReview(review)" class="btn btn-mini btn-danger">
+                                                    <i class="icon-remove icon-white"></i> Delete
+                                                </button>
+
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
+
                             </div>
-
                         </div>
-
-
 
 
                     </div><!-- end reviewController -->
