@@ -100,16 +100,55 @@
                                 <button  ng-click="saveClick()" class="btn btn-small btn-primary">Save</button>
                                 <button  ng-click="cancelClick()" class="btn btn-small  btn-primary">Cancel</button>
                             </div>
-                            <div>{{currentRestaurant}}</div>
+
                         </form>
 
                     </div><!-- end editRestaurantController -->
 
                     <div id="reviewController" ng-controller="reviewController" class="span6 pull-right">
                         <h4 style="display: inline-block">Ratings</h4> 
-                        <div>
-                            <button id="addReviewButton"  class='btn btn-small btn-primary'>
-                                <i class="icon-pencil icon-white"></i> Add Review</button>
+                        <div ng-switch="isAdding">
+
+                            <!-- begin adding new review -->
+                            <div ng-switch-when="true" style="margin-bottom:5px">
+                                <input style="margin-right:3px"  class="input-xlarge"  type="text">  
+
+
+                                <select  style="margin-right:2px"  class="input-mini">  
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+
+                                </select>    <span class="icon-star"></span> s
+                                <div>
+                                    <button  ng-click="saveNewReview()" class="btn btn-small btn-primary"> 
+                                        <i class="icon-edit icon-white"></i> Save 
+                                    </button>
+                                    <button ng-click="cancelNewReview()" class="btn btn-small btn-danger">
+                                        <i class="icon-remove icon-white"></i> Cancel 
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="false"  style="margin-bottom:5px">
+                                <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
+                                    <i class="icon-pencil icon-white"></i> Add Review</button>
+                            </div>
+
+                            <!-- end adding new review -->
+
+
+
                         </div>
 
                         <div ng-repeat="review in currentReviews">

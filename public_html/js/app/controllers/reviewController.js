@@ -33,18 +33,31 @@
         messageFactory.subscribe(deleteRestaurantHandler,"ON_RESTAURANT_DELETE");
         
         
+        $scope.isAdding = false;
+        
+        $scope.addNewReview = function ()
+        {
+            $scope.isAdding = true;
+        }
+        $scope.cancelNewReview = function ()
+        {
+            $scope.isAdding = false;
+        }
+        
         $scope.editReview = function (review)
         {
             resetReviews();
             review.isEditing = true;
+            $scope.isAdding = false;
         }
         $scope.saveReviewEdit = function (review)
         {
             review.isEditing = true;
+            $scope.isAdding = false;
         }
         $scope.cancelReviewEdit = function (review)
         {
-            // review.isEditing=true;
+            $scope.isAdding = false;
             resetReviews();
         }
     }
