@@ -2,7 +2,10 @@
 
     var reviewController = function ($scope, $log, reviewFactory, messageFactory) {
 
-         
+        $scope.hasCurrentRestaurant = function()
+        {
+            return reviewFactory.hasCurrentRestaurant();
+        }
 
         //live copy is passed in need to make a copy
         var newRestaurantHandler = function (restaurant)
@@ -15,6 +18,7 @@
 
         }
 
+        
         var deleteRestaurantHandler = function (restaurant)
         {
 

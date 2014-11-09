@@ -11,6 +11,14 @@
         var factory = {};
         var currentRestaurant = null;
         
+        factory.hasCurrentRestaurant =function()
+        {
+            if (currentRestaurant == null)
+                return false;
+            else
+                return true;
+        }
+        
         function transferReview(from, to)
         {
             to.id = from.id;

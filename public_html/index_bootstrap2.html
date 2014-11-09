@@ -108,10 +108,11 @@
                     <div id="reviewController" ng-controller="reviewController" class="span6 pull-right">
                         <h4 style="display: inline-block">Ratings</h4> 
                         <div ng-switch="isAdding">
-
+                            
                             <!-- begin adding new review -->
                             <div ng-switch-when="true" style="margin-bottom:5px">
-                                <input style="margin-right:3px"  class="input-xlarge"  type="text">  
+                                <form name="addReviewForm" role="form" novalidate>
+                                <input required style="margin-right:3px"  class="input-xlarge"  type="text">  
 
 
                                 <select  style="margin-right:2px"  class="input-mini">  
@@ -138,9 +139,10 @@
                                         <i class="icon-remove icon-white"></i> Cancel 
                                     </button>
                                 </div>
+                                </form>
                             </div>
                             <div ng-switch-when="false">
-                                <div style="margin-bottom:5px">
+                                <div   ng-show="hasCurrentRestaurant()"  style="margin-bottom:5px">
                                     <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
                                         <i class="icon-pencil icon-white"></i> Add Review</button>
                                 </div>
