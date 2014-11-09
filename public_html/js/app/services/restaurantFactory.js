@@ -37,7 +37,7 @@
             this.getRestaurantList();
 
             //$log.log('backup ' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
-            messageFactory.raiseEvent("", "ON_ERROR");
+           // messageFactory.raiseEvent("", "ON_ERROR");
             messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
 
         };
