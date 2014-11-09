@@ -11,9 +11,10 @@
         }
         var newRestaurantHandler = function (restaurant)
         {
-
+            $scope.editRestaurantForm.$setPristine(); 
             $scope.currentRestaurant = restaurantFactory.scatterCurrentRestaurant();
             $scope.recordPresent = true;
+            $scope.canAdd = true;
         }
 
         $scope.addNewRestaurant = function ()
