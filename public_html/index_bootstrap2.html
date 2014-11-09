@@ -57,49 +57,105 @@
 
 
 
-                         
-                            <h4 style="display: inline-block">Restaurants</h4>
-                            <div class="form-group" ng-show="canAdd" >
 
-                                <button ng-click="addNewRestaurant()"   class="btn btn-small btn-primary">Add New</button>
+                        <h4 style="display: inline-block">Restaurants</h4>
+                        <div class="form-group" ng-show="canAdd" >
 
+                            <button ng-click="addNewRestaurant()"   class="btn btn-small btn-primary">Add New</button>
+
+                        </div>
+
+                        <form class="form-inline" role="form"  ng-show="recordPresent">
+                            <label class="control-label" for="name"></label>
+                            <div class="controls">
+                                <div class="input-prepend">
+                                    <span class="add-on">Name</span>
+                                    <input id="name" name="name" class="input-xlarge" placeholder="Name"   ng-model="currentRestaurant.name" type="text">
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">City</span>
+                                    <input id="city" name="city" class="input-medium" placeholder="City"  ng-model="currentRestaurant.city"  type="text">
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">State</span>
+                                    <input id="state" name="city" class="input-small" placeholder="State"   ng-model="currentRestaurant.state" type="text">
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Zip Code</span>
+                                    <input id="zipCode" name="zipCode" class="input-small" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">
+                                </div>
+                                <div class="input-prepend">
+                                    <span class="add-on">Version</span>
+                                    <input id="version" name="version" class="input-small" placeholder="Version"   ng-model="currentRestaurant.version" type="text">
+                                </div>
+                            </div>
+                            <div  style="margin-top:5px" ng-show="recordPresent">
+                                <button  ng-click="saveClick()" class="btn btn-small btn-primary">Save</button>
+                                <button  ng-click="cancelClick()" class="btn btn-small  btn-primary">Cancel</button>
                             </div>
 
-                            <form class="form-inline" role="form"  ng-show="recordPresent">
-                                <label class="control-label" for="name"></label>
-                                <div class="controls">
-                                    <div class="input-prepend">
-                                        <span class="add-on">Name</span>
-                                        <input id="name" name="name" class="input-xlarge" placeholder="Name"   ng-model="currentRestaurant.name" type="text">
-                                    </div>
-                                    <div class="input-prepend">
-                                        <span class="add-on">City</span>
-                                        <input id="city" name="city" class="input-medium" placeholder="City"  ng-model="currentRestaurant.city"  type="text">
-                                    </div>
-                                    <div class="input-prepend">
-                                        <span class="add-on">State</span>
-                                        <input id="state" name="city" class="input-small" placeholder="State"   ng-model="currentRestaurant.state" type="text">
-                                    </div>
-                                    <div class="input-prepend">
-                                        <span class="add-on">Zip Code</span>
-                                        <input id="zipCode" name="zipCode" class="input-small" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">
-                                    </div>
-                                    <div class="input-prepend">
-                                        <span class="add-on">Version</span>
-                                        <input id="version" name="version" class="input-small" placeholder="Version"   ng-model="currentRestaurant.version" type="text">
-                                    </div>
-                                </div>
-                                <div  style="margin-top:5px" ng-show="recordPresent">
-                                    <button  ng-click="saveClick()" class="btn btn-small btn-primary">Save</button>
-                                    <button  ng-click="cancelClick()" class="btn btn-small  btn-primary">Cancel</button>
-                                </div>
+                        </form>
 
-                            </form>
-                        
-                   </div>
-                    <!-- end editRestaurantController -->
-                </div>
-                <!-- edit and review container -->        
+                    </div><!-- end editRestaurantController -->
+                    
+                    <div id="reviewController" ng-controller="reviewController" class="span6 pull-right">
+                        <h4 style="display: inline-block">Ratings</h4> <button id="addReviewButton"  class='btn btn-small btn-primary'><i class="icon-pencil icon-white"></i> Add Review</button>
+
+                        <div ng-repeat="review in currentReviews">
+                            <div ng-switch="review.isEditing">
+                                <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
+                                    <input style="margin-right:3px"  class="input-xlarge" ng-model="review.reviewListing" type="text">    
+
+
+                                    <select  style="margin-right:2px"  class="input-mini" ng-model="review.starRating" type="text">  
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                        <option>13</option>
+
+                                    </select>    
+                                    <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
+                                        <i class="icon-edit icon-white"></i> 
+                                    </button>
+                                    <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
+                                        <i class="icon-remove icon-white"></i>  
+                                    </button>
+                                </div>
+                                <div ng-switch-default  class="reviewRow">
+                                    {{review.reviewListing}} ({{review.starRating}} 
+                                    <span class="icon-star"></span> s) 
+
+
+                                    <div style="margin:5px">
+                                        <button  ng-click="editReview(review)" class="btn btn-mini btn-primary"> 
+                                            <i class="icon-edit icon-white"></i> Edit
+                                        </button>
+                                        <button ng-click="deleteReview(review)" class="btn btn-mini btn-danger">
+                                            <i class="icon-remove icon-white"></i> Delete
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div><!-- end reviewController -->
+
+
+                </div><!-- edit and review container -->        
             </div>
 
 
