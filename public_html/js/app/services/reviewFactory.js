@@ -36,7 +36,7 @@
              
             if (currentRestaurant == null)
             {
-               $log.log("current res null in reviewFactory")
+              // $log.log("current res null in reviewFactory")
                 return [];
             }
             

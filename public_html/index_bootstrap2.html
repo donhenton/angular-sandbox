@@ -61,11 +61,11 @@
                         <h4 style="display: inline-block">Restaurants</h4>
                         <div class="form-group" ng-show="canAdd" >
 
-                            <button ng-click="addNewRestaurant()"   class="btn btn-small btn-primary">Add New</button>
+                            <button ng-click="addNewRestaurant()"   class="btn btn-small btn-primary"><i class="icon-pencil icon-white"></i> Add New Restaurant</button>
 
                         </div>
 
-                        <form class="form-inline" role="form"  ng-show="recordPresent">
+                        <form class="form-inline" name="editRestaurantForm"  role="form"  ng-show="recordPresent">
                             <label class="control-label" for="name"></label>
                             <div class="controls">
                                 <div class="input-prepend">
@@ -99,7 +99,11 @@
                     </div><!-- end editRestaurantController -->
                     
                     <div id="reviewController" ng-controller="reviewController" class="span6 pull-right">
-                        <h4 style="display: inline-block">Ratings</h4> <button id="addReviewButton"  class='btn btn-small btn-primary'><i class="icon-pencil icon-white"></i> Add Review</button>
+                        <h4 style="display: inline-block">Ratings</h4> 
+                        <div>
+                            <button id="addReviewButton"  class='btn btn-small btn-primary'>
+                            <i class="icon-pencil icon-white"></i> Add Review</button>
+                        </div>
 
                         <div ng-repeat="review in currentReviews">
                             <div ng-switch="review.isEditing">
@@ -122,7 +126,7 @@
                                         <option>12</option>
                                         <option>13</option>
 
-                                    </select>    
+                                    </select>    <span class="icon-star"></span> s
                                     <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
                                         <i class="icon-edit icon-white"></i> 
                                     </button>

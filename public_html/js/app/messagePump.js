@@ -60,7 +60,7 @@ var messagePump =
              * 
              */
             raiseEvent: function (messagePayload, eventType) {
-                 console.log('raiseEvent '+eventType)
+                // console.log('raiseEvent '+eventType)
                 this.visitSubscribers('raiseEvent', messagePayload, eventType);
             },
             visitSubscribers: function (action, arg, type) {

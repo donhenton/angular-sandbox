@@ -32,11 +32,11 @@
         {
             this.resetCurrentStatus();
             restaurant.is_current = true;
-            $log.log('current' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
+           // $log.log('current' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
             currentRestaurant = restaurant;
             this.getRestaurantList();
 
-            $log.log('backup ' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
+            //$log.log('backup ' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
             messageFactory.raiseEvent("", "ON_ERROR");
             messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
 
@@ -126,14 +126,14 @@
 
         factory.restore = function ()
         {
-            $log.log("current id in restore id " + currentRestaurant.id  );
+            //$log.log("current id in restore id " + currentRestaurant.id  );
             if (typeof currentRestaurant.id == 'undefined' || currentRestaurant.id != 0)
             {
                 var source = restaurantDAOService.getRestaurantById(currentRestaurant.id)
-                $log.log("source in restore id " + source.id + " " + source.name);
+                //$log.log("source in restore id " + source.id + " " + source.name);
                 restaurantDAOService.loadRestaurant(currentRestaurant, source);
-                $log.log("currentRestaurant in restore id " + currentRestaurant.id + " " +
-                        currentRestaurant.name);
+                //$log.log("currentRestaurant in restore id " + currentRestaurant.id + " " +
+                //        currentRestaurant.name);
             }
 
 
