@@ -4,7 +4,13 @@
 
         var daoService = {};
         
-       
+       daoService.addReview = function(currentRestaurant,newReview) 
+       {
+           console.log(currentRestaurant.reviewDTOs);
+           //console.log(newReview);
+           currentRestaurant.reviewDTOs.push(newReview);
+           console.log(currentRestaurant.reviewDTOs);
+       }
         return daoService;
     };
     reviewDAOService.$inject = ['$log'];

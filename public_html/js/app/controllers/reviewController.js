@@ -2,7 +2,9 @@
 
     var reviewController = function ($scope, $log, reviewFactory, messageFactory) {
 
-        $scope.hasCurrentRestaurant = function()
+        $scope.addNewReviewBuffer = reviewFactory.createEmptyReview(0);
+
+        $scope.hasCurrentRestaurant = function ()
         {
             return reviewFactory.hasCurrentRestaurant();
         }
@@ -10,26 +12,30 @@
         //live copy is passed in need to make a copy
         var newRestaurantHandler = function (restaurant)
         {
-             
+
             reviewFactory.changeRestaurant(restaurant);
             $scope.currentReviews = reviewFactory.scatterCurrentReviews();
             $scope.isAdding = false;
-            resetReviews(); 
+            $scope.addNewReviewBuffer = reviewFactory.createEmptyReview(restaurant.id);
+            resetReviews();
 
         }
 
-        
+
         var deleteRestaurantHandler = function (restaurant)
         {
 
             reviewFactory.changeRestaurant(null);
             $scope.currentReviews = reviewFactory.scatterCurrentReviews();
             $scope.isAdding = false;
-            resetReviews(); 
+            $scope.addNewReviewBuffer = reviewFactory.createEmptyReview(0);
+            resetReviews();
+
 
         }
         var resetReviews = function ()
         {
+            
             $scope.currentReviews.forEach(function (r)
             {
                 r.isEditing = false;
@@ -38,20 +44,42 @@
         }
 
         messageFactory.subscribe(newRestaurantHandler, "ON_RESTAURANT_CHANGE");
-        messageFactory.subscribe(deleteRestaurantHandler,"ON_RESTAURANT_DELETE");
-        
-        
+        messageFactory.subscribe(deleteRestaurantHandler, "ON_RESTAURANT_DELETE");
+
+
         $scope.isAdding = false;
-        
-        $scope.addNewReview = function ()
+
+        $scope.addNewReview = function (review)
         {
-            $scope.isAdding = true;
+            $scope.addNewReviewBuffer = reviewFactory.createEmptyReview(0);
+            $scope.isAdding = true; 
+            
         }
         $scope.cancelNewReview = function ()
         {
             $scope.isAdding = false;
         }
-        
+
+        $scope.saveNewReview = function ()
+        {
+           // console.log($scope.addReviewForm);
+            if ($scope.addReviewForm.$valid)
+            {
+                var revCopy = {};
+                reviewFactory.transferReview($scope.addNewReviewBuffer, revCopy);
+                reviewFactory.addReview(revCopy)
+                messageFactory.raiseEvent("","ON_ERROR");
+                $scope.currentReviews = reviewFactory.scatterCurrentReviews();
+                $scope.isAdding = false;
+            }
+            else
+            {
+                 messageFactory.raiseEvent("review text cannnot be blank","ON_ERROR");
+            }
+            
+        }
+
+
         $scope.editReview = function (review)
         {
             resetReviews();

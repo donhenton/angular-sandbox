@@ -106,41 +106,45 @@
                     </div><!-- end editRestaurantController -->
 
                     <div id="reviewController" ng-controller="reviewController" class="span6 pull-right">
+
                         <h4 style="display: inline-block">Ratings</h4> 
                         <div ng-switch="isAdding">
-                            
+
                             <!-- begin adding new review -->
-                            <div ng-switch-when="true" style="margin-bottom:5px">
-                                <form name="addReviewForm" role="form" novalidate>
-                                <input required style="margin-right:3px"  class="input-xlarge"  type="text">  
+                            <form name="addReviewForm" role="form" novalidate>
+                                <div ng-switch-when="true" style="margin-bottom:5px">
+                                    <div>{{addNewReviewBuffer}}</div>
+                                    <div>{{addReviewForm.$error}}</div>
+                                    <input required style="margin-right:3px"  ng-model="addNewReviewBuffer.reviewListing" name="reviewListing" id="reviewListing"  class="input-xlarge"  type="text">  
 
 
-                                <select  style="margin-right:2px"  class="input-mini">  
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                    <option>13</option>
+                                    <select  style="margin-right:2px" ng-model="addNewReviewBuffer.starRating"  class="input-mini">  
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                        <option>13</option>
 
-                                </select>    <span class="icon-star"></span> s
-                                <div>
-                                    <button  ng-click="saveNewReview()" class="btn btn-small btn-primary"> 
-                                        <i class="icon-edit icon-white"></i> Save 
-                                    </button>
-                                    <button ng-click="cancelNewReview()" class="btn btn-small btn-danger">
-                                        <i class="icon-remove icon-white"></i> Cancel 
-                                    </button>
+                                    </select>    <span class="icon-star"></span> s
+                                    <div>
+                                        <button  ng-click="saveNewReview()" class="btn btn-small btn-primary"> 
+                                            <i class="icon-edit icon-white"></i> Save 
+                                        </button>
+                                        <button ng-click="cancelNewReview()" class="btn btn-small btn-danger">
+                                            <i class="icon-remove icon-white"></i> Cancel 
+                                        </button>
+                                    </div>
+
                                 </div>
-                                </form>
-                            </div>
+                            </form>    
                             <div ng-switch-when="false">
                                 <div   ng-show="hasCurrentRestaurant()"  style="margin-bottom:5px">
                                     <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
