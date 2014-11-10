@@ -78,12 +78,13 @@
             }
 
         }
-        $scope.deleteReview = function(review)
+        $scope.deleteReview = function (review)
         {
-            
+
             var r = window.confirm("Do you wish to delete this review?")
+            $scope.cancelReviewEdit(review);
             if (r == true) {
-               reviewFactory.deleteReview(review);
+                reviewFactory.deleteReview(review);
                 $scope.currentReviews = reviewFactory.scatterCurrentReviews();
             }
         }
@@ -98,7 +99,7 @@
         {
             review.isEditing = true;
             $scope.isAdding = false;
-            
+
             if ($scope.editReviewForm.$valid)
             {
                 var success = reviewFactory.saveReviewEdit(review);
