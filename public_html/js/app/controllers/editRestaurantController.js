@@ -70,6 +70,11 @@
                 {
                     errorMessage = "state must be a two letter combination, uppercase";    
                 }
+                
+                if ($scope.editRestaurantForm.version.$error.pattern)
+                {
+                    errorMessage = "version must be a number";    
+                }
 
             }
 

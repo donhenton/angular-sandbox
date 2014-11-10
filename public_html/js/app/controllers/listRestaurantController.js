@@ -11,6 +11,7 @@
         {
 
             restaurantFactory.changeRestaurant(restaurant);
+            onError("");
 
         };
 

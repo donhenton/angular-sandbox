@@ -104,16 +104,18 @@
             {
                 var success = reviewFactory.saveReviewEdit(review);
                 //TODO only do this if successful
-                review.isEditing = false;
                 $scope.cancelReviewEdit(review);
+                review.isEditing = false;
                 console.log("got to valid");
             }
             else
             {
                 messageFactory.raiseEvent("review text cannnot be blank", "ON_ERROR");
             }
+            
+            
         }
-        $scope.cancelReviewEdit = function (review)
+        $scope.cancelReviewEdit = function(review)
         {
             $scope.isAdding = false;
             $scope.currentReviews = reviewFactory.scatterCurrentReviews();
