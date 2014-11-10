@@ -57,10 +57,41 @@
             return errorMessage;
         }
         
-        factory.saveReview = function(newReview)
+        factory.saveReviewEdit = function(newReview)
         {
+            var reviews = currentRestaurant.reviewDTOs;
+            for (var i=0;i<reviews.length;i++)
+            {
+                if (reviews[i].id === newReview.id)
+                {
+                    factory.transferReview(newReview,reviews[i]);
+                    break;
+                }
+            }
+            
+            
+            
             var errorMessage = 
-            reviewDAOService.saveReview(newReview);
+            reviewDAOService.saveReview(currentRestaurant,newReview);
+            return errorMessage;
+        }
+        
+        factory.deleteReview = function(newReview)
+        {
+            var reviews = currentRestaurant.reviewDTOs;
+            for (var i=0;i<reviews.length;i++)
+            {
+                if (reviews[i].id === newReview.id)
+                {
+                    reviews.splice(i,1);
+                    break;
+                }
+            }
+            
+            
+            
+            var errorMessage = 
+            reviewDAOService.saveReview(currentRestaurant,newReview);
             return errorMessage;
         }
 

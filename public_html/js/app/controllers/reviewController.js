@@ -35,7 +35,7 @@
         }
         var resetReviews = function ()
         {
-            
+
             $scope.currentReviews.forEach(function (r)
             {
                 r.isEditing = false;
@@ -52,8 +52,8 @@
         $scope.addNewReview = function (review)
         {
             $scope.addNewReviewBuffer = reviewFactory.createEmptyReview(0);
-            $scope.isAdding = true; 
-            
+            $scope.isAdding = true;
+
         }
         $scope.cancelNewReview = function ()
         {
@@ -62,23 +62,31 @@
 
         $scope.saveNewReview = function ()
         {
-           // console.log($scope.addReviewForm);
+            // console.log($scope.addReviewForm);
             if ($scope.addReviewForm.$valid)
             {
                 var revCopy = {};
                 reviewFactory.transferReview($scope.addNewReviewBuffer, revCopy);
                 reviewFactory.addReview(revCopy)
-                messageFactory.raiseEvent("","ON_ERROR");
+                messageFactory.raiseEvent("", "ON_ERROR");
                 $scope.currentReviews = reviewFactory.scatterCurrentReviews();
                 $scope.isAdding = false;
             }
             else
             {
-                 messageFactory.raiseEvent("review text cannnot be blank","ON_ERROR");
+                messageFactory.raiseEvent("review text cannnot be blank", "ON_ERROR");
             }
-            
-        }
 
+        }
+        $scope.deleteReview = function(review)
+        {
+            
+            var r = window.confirm("Do you wish to delete this review?")
+            if (r == true) {
+               reviewFactory.deleteReview(review);
+                $scope.currentReviews = reviewFactory.scatterCurrentReviews();
+            }
+        }
 
         $scope.editReview = function (review)
         {
@@ -90,24 +98,26 @@
         {
             review.isEditing = true;
             $scope.isAdding = false;
+            
             if ($scope.editReviewForm.$valid)
             {
-            
+                var success = reviewFactory.saveReviewEdit(review);
+                //TODO only do this if successful
+                review.isEditing = false;
+                $scope.cancelReviewEdit(review);
+                console.log("got to valid");
             }
             else
             {
-                 messageFactory.raiseEvent("review text cannnot be blank","ON_ERROR");
+                messageFactory.raiseEvent("review text cannnot be blank", "ON_ERROR");
             }
-            
-            
-            
-            
-            
         }
         $scope.cancelReviewEdit = function (review)
         {
             $scope.isAdding = false;
+            $scope.currentReviews = reviewFactory.scatterCurrentReviews();
             resetReviews();
+            $scope.editReviewForm.$setPristine();
         }
     }
     reviewController.$inject = ['$scope', '$log', 'reviewFactory', 'messageFactory', 'restaurantFactory'];

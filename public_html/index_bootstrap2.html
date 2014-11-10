@@ -113,7 +113,7 @@
                             <!-- begin adding new review -->
                             <form name="addReviewForm" role="form" novalidate>
                                 <div ng-switch-when="true" style="margin-bottom:5px">
- 
+
                                     <input required style="margin-right:3px"  ng-model="addNewReviewBuffer.reviewListing" name="reviewListing" id="reviewListing"  class="input-xlarge"  type="text">  
 
 
@@ -143,27 +143,24 @@
                                     </div>
 
                                 </div>
-                            </form>    
-                            <div ng-switch-when="false">
-                                <div   ng-show="hasCurrentRestaurant()"  style="margin-bottom:5px">
-                                    <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
-                                        <i class="icon-pencil icon-white"></i> Add Review</button>
-                                </div>
+                            </form>   
+                            <form name="editReviewForm" role="form" novalidate>
+                                <div ng-switch-when="false">
+                                    <div   ng-show="hasCurrentRestaurant()"  style="margin-bottom:5px">
+                                        <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
+                                            <i class="icon-pencil icon-white"></i> Add Review</button>
+                                    </div>
 
-                                <!-- end adding new review -->
+                                    <!-- end adding new review -->
 
+                                    <div ng-repeat="review in currentReviews">
+                                        <div ng-switch="review.isEditing">
+                                            <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
 
-
-
-
-                                <div ng-repeat="review in currentReviews">
-                                    <div ng-switch="review.isEditing">
-                                        <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
-                                            <form name="editReviewForm" role="form" novalidate>
-                                                <input style="margin-right:3px"  class="input-xlarge" ng-model="review.reviewListing" type="text">    
+                                                <input style="margin-right:3px" required class="input-xlarge" ng-model="review.reviewListing" type="text">    
 
 
-                                                <select  style="margin-right:2px"  class="input-mini" ng-model="review.starRating" type="text">  
+                                                <select  style="margin-right:2px" required class="input-mini" ng-model="review.starRating" type="text">  
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -185,28 +182,29 @@
                                                 <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
                                                     <i class="icon-remove icon-white"></i>  
                                                 </button>
-                                            </form>
-                                        </div>
-                                        <div ng-switch-default  class="reviewRow">
-                                            {{review.reviewListing}} ({{review.starRating}} 
-                                            <span class="icon-star"></span> s) 
-
-
-                                            <div style="margin:5px">
-                                                <button  ng-click="editReview(review)" class="btn btn-mini btn-primary"> 
-                                                    <i class="icon-edit icon-white"></i> Edit
-                                                </button>
-                                                <button ng-click="deleteReview(review)" class="btn btn-mini btn-danger">
-                                                    <i class="icon-remove icon-white"></i> Delete
-                                                </button>
 
                                             </div>
+                                            <div ng-switch-default  class="reviewRow">
+                                                {{review.reviewListing}} ({{review.starRating}} 
+                                                <span class="icon-star"></span> s) 
+
+
+                                                <div style="margin:5px">
+                                                    <button  ng-click="editReview(review)" class="btn btn-mini btn-primary"> 
+                                                        <i class="icon-edit icon-white"></i> Edit
+                                                    </button>
+                                                    <button ng-click="deleteReview(review)" class="btn btn-mini btn-danger">
+                                                        <i class="icon-remove icon-white"></i> Delete
+                                                    </button>
+
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
 
                                 </div>
-
-                            </div>
+                            </form>
                         </div>
 
 

@@ -6,11 +6,22 @@
         
        daoService.addReview = function(currentRestaurant,newReview) 
        {
-           console.log(currentRestaurant.reviewDTOs);
+          // console.log(currentRestaurant.reviewDTOs);
            //console.log(newReview);
            currentRestaurant.reviewDTOs.push(newReview);
-           console.log(currentRestaurant.reviewDTOs);
+          // console.log(currentRestaurant.reviewDTOs);
        }
+       
+       daoService.saveReview = function(currentRestaurant,newReview) 
+       {
+           //console.log(currentRestaurant.reviewDTOs);
+           //console.log(newReview);
+           //currentRestaurant.reviewDTOs.push(newReview);
+           //console.log(currentRestaurant.reviewDTOs);
+       }
+       
+       
+       
         return daoService;
     };
     reviewDAOService.$inject = ['$log'];
