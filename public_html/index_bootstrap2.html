@@ -113,8 +113,7 @@
                             <!-- begin adding new review -->
                             <form name="addReviewForm" role="form" novalidate>
                                 <div ng-switch-when="true" style="margin-bottom:5px">
-                                    <div>{{addNewReviewBuffer}}</div>
-                                    <div>{{addReviewForm.$error}}</div>
+ 
                                     <input required style="margin-right:3px"  ng-model="addNewReviewBuffer.reviewListing" name="reviewListing" id="reviewListing"  class="input-xlarge"  type="text">  
 
 
@@ -160,31 +159,33 @@
                                 <div ng-repeat="review in currentReviews">
                                     <div ng-switch="review.isEditing">
                                         <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
-                                            <input style="margin-right:3px"  class="input-xlarge" ng-model="review.reviewListing" type="text">    
+                                            <form name="editReviewForm" role="form" novalidate>
+                                                <input style="margin-right:3px"  class="input-xlarge" ng-model="review.reviewListing" type="text">    
 
 
-                                            <select  style="margin-right:2px"  class="input-mini" ng-model="review.starRating" type="text">  
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                                <option>7</option>
-                                                <option>8</option>
-                                                <option>9</option>
-                                                <option>10</option>
-                                                <option>11</option>
-                                                <option>12</option>
-                                                <option>13</option>
+                                                <select  style="margin-right:2px"  class="input-mini" ng-model="review.starRating" type="text">  
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                    <option>9</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                    <option>13</option>
 
-                                            </select>    <span class="icon-star"></span> s
-                                            <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
-                                                <i class="icon-edit icon-white"></i> 
-                                            </button>
-                                            <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
-                                                <i class="icon-remove icon-white"></i>  
-                                            </button>
+                                                </select>    <span class="icon-star"></span> s
+                                                <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
+                                                    <i class="icon-edit icon-white"></i> 
+                                                </button>
+                                                <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
+                                                    <i class="icon-remove icon-white"></i>  
+                                                </button>
+                                            </form>
                                         </div>
                                         <div ng-switch-default  class="reviewRow">
                                             {{review.reviewListing}} ({{review.starRating}} 

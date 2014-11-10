@@ -90,6 +90,19 @@
         {
             review.isEditing = true;
             $scope.isAdding = false;
+            if ($scope.editReviewForm.$valid)
+            {
+            
+            }
+            else
+            {
+                 messageFactory.raiseEvent("review text cannnot be blank","ON_ERROR");
+            }
+            
+            
+            
+            
+            
         }
         $scope.cancelReviewEdit = function (review)
         {
