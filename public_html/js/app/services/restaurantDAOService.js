@@ -19,7 +19,8 @@
         };
 
         /**
-         * 
+         * the service will return either {id: XXXX} on success 
+         * or {{message: "XXX" errorClass: "XXX}
          * @param {type} newRestaurant
          * @returns a string with error message or null
          */
