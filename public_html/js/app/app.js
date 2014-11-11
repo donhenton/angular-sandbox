@@ -1,5 +1,5 @@
 (function() {
     
-    var app = angular.module('restaurantApp', []);
+    var app = angular.module('restaurantApp', ['ngResource']);
 
 }());

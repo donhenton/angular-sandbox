@@ -1,10 +1,12 @@
 (function () {
 
-    var restaurantDAOService = function ($log) {
+    var restaurantDAOService = function ($log,$resource) {
 
         var daoService = {};
+        var localRestaurantCopy = null;
         var restaurantListIndex = {};
         var setUpRestaurantList = function ()
+        
         {
             restaurantListIndex = {}
             daoService.getAllRestaurants().forEach(function (restaurant)
@@ -92,7 +94,7 @@
         setUpRestaurantList();
         return daoService;
     };
-    restaurantDAOService.$inject = ['$log'];
+    restaurantDAOService.$inject = ['$log','$http'];
 
     angular.module('restaurantApp').factory('restaurantDAOService', restaurantDAOService);
 
