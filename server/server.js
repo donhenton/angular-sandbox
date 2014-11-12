@@ -59,6 +59,27 @@ app.put('/restaurant/:id', function (req, res) {
 
 });
 
+//@remove restaurant
+app.delete('/restaurant/:id', function (req, res) {
+   // console.log(req.body);
+    var restaurantId = parseInt(req.params.id);
+    req.body.id = restaurantId;
+    var errorMessage = daoService.deleteRestaurant(req.body);
+    var resVar = null;
+    if (errorMessage == null)
+    {
+        resVar = daoService.createIdResponse(req.body.id);
+        res.json(resVar);
+    }
+    else
+    {
+        resVar = daoService.createError('Not Found', "NotFoundClass");
+        res.status(404);
+    }
+    res.json(resVar);
+
+});
+
 //@getRestaurant(id)
 app.get('/restaurant/:id', function (req, res) {
     var restaurantId = parseInt(req.params.id);
@@ -83,10 +104,26 @@ app.get('/restaurant/:id', function (req, res) {
 app.get('/restaurant', function (req, res) {
     res.json(g_restaurantData);
 
-    //res.json(500, { error: 'An error has occurred!' });
+});
+//////////////// reviews /////////////////////////////
+
+
+//@create restaurant
+app.post('/restaurant/review/:restaurantId', function (req, res) {
+    var restaurantId = parseInt(req.params.restaurantId);
+    var reviewBody = req.body;
+    //daoService.addReview(restaurantId,reviewBody);
+    res.json(daoService.createIdResponse(req.body.id));
 });
 
+/*
 
+/restaurant/review/:restaurantId POST addreview
+/restaurant/review/:restaurantId/reviewId PUT savereview
+/restaurant/review/:restaurantId/reviewId DELETE deleteview
+
+
+*/
 app.listen(6080);
 
 console.log('Express listening on port 6080');
@@ -195,6 +232,13 @@ daoService.deleteRestaurant = function (restaurant)
         resCollection.splice(idx, 1);
         setUpRestaurantList();
     }
+    else
+    {
+       errorMessage = "unable to find restaurant with id of " +
+                restaurant.id;
+    }
+    
+    return errorMessage;
 
 
 }
