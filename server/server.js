@@ -32,9 +32,10 @@ app.use(function (req, res, next) {
 
 //@create restaurant
 app.post('/restaurant', function (req, res) {
-    //console.log(req.body);
+   // console.log(req.body);
     daoService.createRestaurant(req.body);
-    res.json(daoService.createIdResponse(req.body.id));
+    var resVar = daoService.createIdResponse(req.body.id);
+    res.json(resVar);
 });
 
 
@@ -48,7 +49,6 @@ app.put('/restaurant/:id', function (req, res) {
     if (errorMessage == null)
     {
         resVar = daoService.createIdResponse(req.body.id);
-        res.json(resVar);
     }
     else
     {
@@ -66,17 +66,13 @@ app.delete('/restaurant/:id', function (req, res) {
     req.body.id = restaurantId;
     var errorMessage = daoService.deleteRestaurant(req.body);
     var resVar = null;
-    if (errorMessage == null)
-    {
-        resVar = daoService.createIdResponse(req.body.id);
-        res.json(resVar);
-    }
-    else
+    if (errorMessage != null)
     {
         resVar = daoService.createError('Not Found', "NotFoundClass");
         res.status(404);
+        res.json(resVar);
     }
-    res.json(resVar);
+    
 
 });
 
@@ -114,7 +110,7 @@ app.post('/restaurant/review/:restaurantId', function (req, res) {
     var reviewBody = req.body;
     var message = daoService.addReview(restaurantId,reviewBody);
     if (message == null)
-        res.json(daoService.createIdResponse(req.body.id));
+        res.json(daoService.createIdResponse(reviewBody.id));
     else
     {
         var resVar = daoService.createError(message, "NotFoundClass");
@@ -127,9 +123,9 @@ app.put('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
     var restaurantId = parseInt(req.params.restaurantId);
     var reviewId = parseInt(req.params.reviewId);
     var reviewBody = req.body;
-    var message = daoService.addReview(restaurantId,reviewId,reviewBody);
+    var message = daoService.saveReview(restaurantId,reviewId,reviewBody);
     if (message == null)
-        res.json(daoService.createIdResponse(req.body.id));
+        return res.json(null);
     else
     {
         var resVar = daoService.createError(message, "NotFoundClass");
@@ -138,13 +134,15 @@ app.put('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
     }
 });
 
+//@delete review
+
 app.delete('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
     var restaurantId = parseInt(req.params.restaurantId);
     var reviewId = parseInt(req.params.reviewId);
      
     var message = daoService.deleteReview(restaurantId,reviewId);
     if (message == null)
-        res.json(daoService.createIdResponse(req.body.id));
+        return;
     else
     {
         var resVar = daoService.createError(message, "NotFoundClass");
@@ -178,6 +176,7 @@ daoService.createIdResponse = function (idValue)
 {
     var id = {};
     id["id"] = idValue;
+    return id;
 }
 daoService.createError = function (message, classVar)
 {
@@ -190,7 +189,7 @@ daoService.saveRestaurant = function (newRestaurant)
 {
     var errorMessage = null;
     var lookup = daoService.getRestaurantById(newRestaurant.id);
-    console.log("in save key " + newRestaurant.id + " " + lookup);
+   // console.log("in save key " + newRestaurant.id + " " + lookup);
     if (lookup == null)
     {
         errorMessage = "unable to find restaurant with id of " +
@@ -233,6 +232,10 @@ daoService.getAllRestaurants = function ()
 {
     return g_restaurantData;
 };
+daoService.createNewId = function()
+{
+    return (new Date()).getTime();
+}
 /**
  * 
  * @param {type} newRestaurant
@@ -241,7 +244,7 @@ daoService.getAllRestaurants = function ()
 daoService.createRestaurant = function (r)
 {
     var errorMessage = null;
-    r.id = (new Date()).getTime();
+    r.id = daoService.createNewId();
     this.getAllRestaurants().unshift(r);
     r.reviewDTOs = [];
     setUpRestaurantList();
@@ -282,7 +285,7 @@ daoService.deleteRestaurant = function (restaurant)
 }
 //////////////////////////////
 
-daoService.deleteReview = function (restaurantId, review, reviewAction)
+daoService.deleteReview = function (restaurantId, newReviewId)
 {
     var currentRestaurant =
             daoService.getRestaurantById(restaurantId)
@@ -296,8 +299,7 @@ daoService.deleteReview = function (restaurantId, review, reviewAction)
             if (reviews[i].id === newReviewId)
             {
                 foundReview = true;
-                reviews.splice(i, 1);
-                reviewAction(reviews, review)
+                reviews.splice(i, 1);    
                 break;
             }
         }
@@ -323,6 +325,7 @@ daoService.addReview = function (restaurantId, review)
     if (currentRestaurant != null)
     {
         var reviews = currentRestaurant.reviewDTOs;
+        review.id =   daoService.createNewId();
         reviews.push(review);
     }
     else
@@ -348,12 +351,13 @@ daoService.saveReview = function (restaurantId,reviewId, review)
             if (reviews[i].id === reviewId)
             {
                 foundReview = true;
+               // console.log("found review");
                 reviews[i] = review;
             }
         }
         if (!foundReview)
         {
-            message = "unable to find review " + newReviewId + " for restaurant " +
+            message = "unable to find review " + reviewId + " for restaurant " +
                     restaurantId;
         }
     }
