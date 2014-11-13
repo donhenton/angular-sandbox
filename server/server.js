@@ -108,18 +108,56 @@ app.get('/restaurant', function (req, res) {
 //////////////// reviews /////////////////////////////
 
 
-//@create restaurant
+//@create review
 app.post('/restaurant/review/:restaurantId', function (req, res) {
     var restaurantId = parseInt(req.params.restaurantId);
     var reviewBody = req.body;
-    //daoService.addReview(restaurantId,reviewBody);
-    res.json(daoService.createIdResponse(req.body.id));
+    var message = daoService.addReview(restaurantId,reviewBody);
+    if (message == null)
+        res.json(daoService.createIdResponse(req.body.id));
+    else
+    {
+        var resVar = daoService.createError(message, "NotFoundClass");
+        res.status(404);
+        res.json(resVar);
+    }
 });
+//@save review
+app.put('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
+    var restaurantId = parseInt(req.params.restaurantId);
+    var reviewId = parseInt(req.params.reviewId);
+    var reviewBody = req.body;
+    var message = daoService.addReview(restaurantId,reviewId,reviewBody);
+    if (message == null)
+        res.json(daoService.createIdResponse(req.body.id));
+    else
+    {
+        var resVar = daoService.createError(message, "NotFoundClass");
+        res.status(404);
+        res.json(resVar);
+    }
+});
+
+app.delete('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
+    var restaurantId = parseInt(req.params.restaurantId);
+    var reviewId = parseInt(req.params.reviewId);
+     
+    var message = daoService.deleteReview(restaurantId,reviewId);
+    if (message == null)
+        res.json(daoService.createIdResponse(req.body.id));
+    else
+    {
+        var resVar = daoService.createError(message, "NotFoundClass");
+        res.status(404);
+        res.json(resVar);
+    }
+});
+
 
 /*
  
  /restaurant/review/:restaurantId POST addreview
- /restaurant/review/:restaurantId/reviewId PUT savereview
+ /restaurant/review/:restaurantId/:reviewId PUT savereview
  /restaurant/review/:restaurantId/reviewId DELETE deleteview
  
  
@@ -296,7 +334,7 @@ daoService.addReview = function (restaurantId, review)
 
 };
 
-daoService.saveReview = function (restaurantId, review)
+daoService.saveReview = function (restaurantId,reviewId, review)
 {
     var currentRestaurant =
             daoService.getRestaurantById(restaurantId)
@@ -307,7 +345,7 @@ daoService.saveReview = function (restaurantId, review)
         var foundReview = false;
         for (var i = 0; i < reviews.length; i++)
         {
-            if (reviews[i].id === review.id)
+            if (reviews[i].id === reviewId)
             {
                 foundReview = true;
                 reviews[i] = review;
