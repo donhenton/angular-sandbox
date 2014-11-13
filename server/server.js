@@ -244,40 +244,6 @@ daoService.deleteRestaurant = function (restaurant)
 }
 //////////////////////////////
 
-daoService.deleteReview = function (restaurantId, newReviewId, reviewAction)
-{
-    var currentRestaurant =
-            daoService.getRestaurantById(restaurantId)
-    var message = null;
-    if (currentRestaurant != null)
-    {
-        var reviews = currentRestaurant.reviewDTOs;
-        var foundReview = false;
-        for (var i = 0; i < reviews.length; i++)
-        {
-            if (reviews[i].id === newReviewId)
-            {
-                foundReview = true;
-                // reviews.splice(i, 1);
-
-                break;
-            }
-        }
-        if (!foundReview)
-        {
-            message = "unable to find review " + newReviewId + " for restaurant " +
-                    restaurantId;
-        }
-    }
-    else
-    {
-        message = "unable to find restaurant with id of " +
-                restaurantId;
-    }
-    return message;
-};
-
-
 daoService.deleteReview = function (restaurantId, review, reviewAction)
 {
     var currentRestaurant =
