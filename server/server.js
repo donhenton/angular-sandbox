@@ -40,7 +40,7 @@ app.post('/restaurant', function (req, res) {
 
 //@update restaurant
 app.put('/restaurant/:id', function (req, res) {
-   // console.log(req.body);
+    // console.log(req.body);
     var restaurantId = parseInt(req.params.id);
     req.body.id = restaurantId;
     var errorMessage = daoService.saveRestaurant(req.body);
@@ -61,7 +61,7 @@ app.put('/restaurant/:id', function (req, res) {
 
 //@remove restaurant
 app.delete('/restaurant/:id', function (req, res) {
-   // console.log(req.body);
+    // console.log(req.body);
     var restaurantId = parseInt(req.params.id);
     req.body.id = restaurantId;
     var errorMessage = daoService.deleteRestaurant(req.body);
@@ -117,13 +117,13 @@ app.post('/restaurant/review/:restaurantId', function (req, res) {
 });
 
 /*
-
-/restaurant/review/:restaurantId POST addreview
-/restaurant/review/:restaurantId/reviewId PUT savereview
-/restaurant/review/:restaurantId/reviewId DELETE deleteview
-
-
-*/
+ 
+ /restaurant/review/:restaurantId POST addreview
+ /restaurant/review/:restaurantId/reviewId PUT savereview
+ /restaurant/review/:restaurantId/reviewId DELETE deleteview
+ 
+ 
+ */
 app.listen(6080);
 
 console.log('Express listening on port 6080');
@@ -152,19 +152,19 @@ daoService.saveRestaurant = function (newRestaurant)
 {
     var errorMessage = null;
     var lookup = daoService.getRestaurantById(newRestaurant.id);
-    console.log("in save key "+newRestaurant.id+" "+lookup);
+    console.log("in save key " + newRestaurant.id + " " + lookup);
     if (lookup == null)
     {
         errorMessage = "unable to find restaurant with id of " +
                 newRestaurant.id;
-        
+
     }
     else
     {
-         daoService.loadRestaurant(lookup, newRestaurant);
+        daoService.loadRestaurant(lookup, newRestaurant);
     }
-   
-   
+
+
     return errorMessage;
 };
 
@@ -181,7 +181,7 @@ daoService.loadRestaurant = function (destRestaurant, sourceRestaurant)
 
 daoService.getRestaurantById = function (id)
 {
-    var f =  restaurantListIndex[id];
+    var f = restaurantListIndex[id];
     if (typeof f == 'undefined')
     {
         return null;
@@ -234,16 +234,133 @@ daoService.deleteRestaurant = function (restaurant)
     }
     else
     {
-       errorMessage = "unable to find restaurant with id of " +
+        errorMessage = "unable to find restaurant with id of " +
                 restaurant.id;
     }
-    
+
     return errorMessage;
 
 
 }
+//////////////////////////////
+
+daoService.deleteReview = function (restaurantId, newReviewId, reviewAction)
+{
+    var currentRestaurant =
+            daoService.getRestaurantById(restaurantId)
+    var message = null;
+    if (currentRestaurant != null)
+    {
+        var reviews = currentRestaurant.reviewDTOs;
+        var foundReview = false;
+        for (var i = 0; i < reviews.length; i++)
+        {
+            if (reviews[i].id === newReviewId)
+            {
+                foundReview = true;
+                // reviews.splice(i, 1);
+
+                break;
+            }
+        }
+        if (!foundReview)
+        {
+            message = "unable to find review " + newReviewId + " for restaurant " +
+                    restaurantId;
+        }
+    }
+    else
+    {
+        message = "unable to find restaurant with id of " +
+                restaurantId;
+    }
+    return message;
+};
 
 
+daoService.deleteReview = function (restaurantId, review, reviewAction)
+{
+    var currentRestaurant =
+            daoService.getRestaurantById(restaurantId)
+    var message = null;
+    if (currentRestaurant != null)
+    {
+        var reviews = currentRestaurant.reviewDTOs;
+        var foundReview = false;
+        for (var i = 0; i < reviews.length; i++)
+        {
+            if (reviews[i].id === newReviewId)
+            {
+                foundReview = true;
+                reviews.splice(i, 1);
+                reviewAction(reviews, review)
+                break;
+            }
+        }
+        if (!foundReview)
+        {
+            message = "unable to find review " + newReviewId + " for restaurant " +
+                    restaurantId;
+        }
+    }
+    else
+    {
+        message = "unable to find restaurant with id of " +
+                restaurantId;
+    }
+    return message;
+};
+
+daoService.addReview = function (restaurantId, review)
+{
+    var currentRestaurant =
+            daoService.getRestaurantById(restaurantId)
+    var message = null;
+    if (currentRestaurant != null)
+    {
+        var reviews = currentRestaurant.reviewDTOs;
+        reviews.push(review);
+    }
+    else
+    {
+        message = "unable to find restaurant with id of " +
+                restaurantId;
+    }
+    return message;
+
+};
+
+daoService.saveReview = function (restaurantId, review)
+{
+    var currentRestaurant =
+            daoService.getRestaurantById(restaurantId)
+    var message = null;
+    if (currentRestaurant != null)
+    {
+        var reviews = currentRestaurant.reviewDTOs;
+        var foundReview = false;
+        for (var i = 0; i < reviews.length; i++)
+        {
+            if (reviews[i].id === review.id)
+            {
+                foundReview = true;
+                reviews[i] = review;
+            }
+        }
+        if (!foundReview)
+        {
+            message = "unable to find review " + newReviewId + " for restaurant " +
+                    restaurantId;
+        }
+    }
+    else
+    {
+        message = "unable to find restaurant with id of " +
+                restaurantId;
+    }
+    return message;
+
+};
 
 var g_restaurantData = [
     {
@@ -302,7 +419,7 @@ var g_restaurantData = [
         "state": " IN",
         "version": 1,
         "zipCode": " 46268"
-   },
+    },
     /*    
      
      {
