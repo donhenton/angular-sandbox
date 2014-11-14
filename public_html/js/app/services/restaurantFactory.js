@@ -21,7 +21,7 @@
             return restaurantDAOService.deleteRestaurant(restaurant).
                     success(function (data, status, headers, config) {
                         restaurantList = restaurantDAOService.getAllRestaurants();
-                        currentRestaurant = this.createEmptyRestaurant();
+                        currentRestaurant = factory.createEmptyRestaurant();
                         messageFactory.raiseEvent(currentRestaurant, "ON_RESTAURANT_DELETE");
                          console.log("factory delete count "+
                                   restaurantList.length);
