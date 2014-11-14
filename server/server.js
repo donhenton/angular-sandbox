@@ -70,9 +70,9 @@ app.delete('/restaurant/:id', function (req, res) {
     {
         resVar = daoService.createError('Not Found', "NotFoundClass");
         res.status(404);
-        res.json(resVar);
+        
     }
-    
+    res.json(resVar);
 
 });
 
@@ -257,21 +257,28 @@ daoService.deleteRestaurant = function (restaurant)
     //
     //splice it out
     //setUpRestaurantList();
+    console.log("del 1");
     var errorMessage = null;
     var idx = -1;
     var resCollection = this.getAllRestaurants();
+    console.log("del 2 "+resCollection.length);
+    
     for (i = 0; i < resCollection.length; i++)
     {
         if (resCollection[i].id === restaurant.id)
         {
             idx = i;
+            console.log("del 3 hit "+idx)
             break;
         }
     }
+     console.log("dao delete4 "+idx)
     if (idx > -1)
     {
         resCollection.splice(idx, 1);
+        console.log("dao delete5 "+idx)
         setUpRestaurantList();
+        console.log("dao delete6 "+idx)
     }
     else
     {
