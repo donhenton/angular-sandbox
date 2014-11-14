@@ -10,7 +10,7 @@
             var errorMessage = null;
             $http.post(g_restaurantUrlBase+"review/"+currentRestaurant.id, newReview).
                     success(function (data, status, headers, config) {
-                        this.getAllRestaurants().unshift(newReview);
+                        daoService.getAllRestaurants().unshift(newReview);
                         newReview.reviewDTOs = [];
                         newReview.id = data.id;
                     }).
@@ -42,7 +42,7 @@
        
         return daoService;
     };
-    reviewDAOService.$inject = ['$log'];
+    reviewDAOService.$inject = ['$log','$http'];
 
     angular.module('restaurantApp').factory('reviewDAOService', reviewDAOService);
 
