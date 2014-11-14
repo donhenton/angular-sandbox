@@ -32,12 +32,8 @@
         {
             this.resetCurrentStatus();
             restaurant.is_current = true;
-            // $log.log('current' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
             currentRestaurant = restaurant;
             this.getRestaurantList();
-
-            //$log.log('backup ' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
-            // messageFactory.raiseEvent("", "ON_ERROR");
             messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
 
         };
