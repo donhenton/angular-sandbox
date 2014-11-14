@@ -21,28 +21,6 @@
 
         };
 
-        /** //@
-         * the service will return either {id: XXXX} on success 
-         * or {{message: "XXX" errorClass: "XXX}
-         * @param {type} newRestaurant
-         * @returns a string with error message or null
-         */
-        daoService.saveRestaurant = function (newRestaurant)
-        {
-            var errorMessage = null;
-            $http.put(g_restaurantUrlBase + "/" + newRestaurant.id, newRestaurant).
-                    success(function (data, status, headers, config) {
-                        var lookup = daoService.getRestaurantById(newRestaurant.id);
-                        daoService.loadRestaurant(lookup, newRestaurant);
-                    }).
-                    error(function (data, status, headers, config) {
-                        errorMessage = data.message;
-                    });
-
-            return errorMessage;
-
-        };
-
         //@
         daoService.loadRestaurant = function (destRestaurant, sourceRestaurant)
         {
@@ -57,7 +35,13 @@
         //@
         daoService.getRestaurantById = function (id)
         {
-            return restaurantListIndex[id];
+            
+            var r =  restaurantListIndex[id];
+            if (typeof r ==='undefined' || r ===null)
+            {
+                console.log("lookup fail "+id + '    '+restaurantListIndex.length);
+            }
+            return r;
         };
 
         //@
@@ -69,16 +53,33 @@
 
         daoService.init = function ()
         {
-            return  $http.get(g_restaurantUrlBase + "/restaurant").
+            return  $http.get(g_restaurantUrlBase).
                     success(function (data, status, headers, config) {
                         console.log("dao init")
                         localRestaurantCopy = data;
-                        // setUpRestaurantList();
+                        setUpRestaurantList();
                     }).
                     error(function (data, status, headers, config) {
 
                     });
         }
+        
+         /** //@
+         * the service will return either {id: XXXX} on success 
+         * or {{message: "XXX" errorClass: "XXX}
+         * @param {type} newRestaurant
+         * @returns a string with error message or null
+         */
+        daoService.saveRestaurant = function (newRestaurant)
+        {
+            return $http.put(g_restaurantUrlBase  + newRestaurant.id, newRestaurant).
+                    success(function (data, status, headers, config) {
+                        var lookup = daoService.getRestaurantById(newRestaurant.id);
+                        daoService.loadRestaurant(lookup, newRestaurant);
+                    }) ;
+
+        };
+        
         /**
          * //@
          * @param {type} newRestaurant
@@ -86,26 +87,21 @@
          */
         daoService.addRestaurant = function (r)
         {
-            var errorMessage = null;
-
-            $http.post(g_restaurantUrlBase, r).
+            
+            return  $http.post(g_restaurantUrlBase, r).
                     success(function (data, status, headers, config) {
                         this.getAllRestaurants().unshift(r);
                         r.reviewDTOs = [];
                         r.id = data.id;
-                    }).
-                    error(function (data, status, headers, config) {
-                        errorMessage = data.message;
-                    });
-            return errorMessage;
+                    }) ;
+             
         }
         //@
         daoService.deleteRestaurant = function (restaurant)
         {
 
-            var errorMessage = null;
-
-            $http.delete(g_restaurantUrlBase + "/" + restaurant.id).
+           
+            return  $http.delete(g_restaurantUrlBase  + restaurant.id).
                     success(function (data, status, headers, config) {
 
                         var idx = -1;
@@ -124,12 +120,7 @@
                             setUpRestaurantList();
                         }
 
-                    }).
-                    error(function (data, status, headers, config) {
-                        errorMessage = data.message;
-                    });
-
-            return errorMessage;
+                    }) 
 
         }
 

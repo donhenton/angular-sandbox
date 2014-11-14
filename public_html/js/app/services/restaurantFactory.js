@@ -93,30 +93,28 @@
         factory.saveRestaurant = function (newRestaurant)
         {
 
-            var errorMessage = null;
-
-            errorMessage = this.validateRestaurant(newRestaurant);
-            if (errorMessage === null)
-            {
+            
                 if (newRestaurant.id > 0)
                 {
-                    //save mode
-                    errorMessage = restaurantDAOService.saveRestaurant(newRestaurant);
+                   return  restaurantDAOService.saveRestaurant(newRestaurant).
+                    success(function (data, status, headers, config) {
+                        restaurantList = 
+                                restaurantDAOService.getAllRestaurants();
+                    }); 
                 }
                 else
                 {
-                    //add mode
-                    errorMessage = restaurantDAOService.addRestaurant(newRestaurant);
+                    return restaurantDAOService.addRestaurant(newRestaurant).
+                    success(function (data, status, headers, config) {
+                        restaurantList = 
+                                restaurantDAOService.getAllRestaurants();
+                    }); 
                 }
-            }
-            if (errorMessage === null)
-            {
-                restaurantList = restaurantDAOService.getAllRestaurants();
-
-            }
+            
+            
 
 
-            return errorMessage;
+            
 
         };
 
@@ -152,10 +150,9 @@
                     success(function (data, status, headers, config) {
                         console.log("factory init")
                         restaurantList = data;
-                        // setUpRestaurantList();
-                    }).
-                    error(function (data, status, headers, config) {
-
+                        currentRestaurant = {};
+                        factory.resetCurrentStatus();
+                         
                     });
         }
          

@@ -9,7 +9,7 @@
         {
             restaurantFactory.init().
                     success(function (data, status, headers, config) {
-                        console.log("controller init")
+                         console.log("controller init")
                          $scope.restaurantList =    data;
                       
                     }).
