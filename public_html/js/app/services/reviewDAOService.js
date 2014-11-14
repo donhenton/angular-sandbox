@@ -7,12 +7,12 @@
        daoService.addReview = function(currentRestaurant,newReview) 
        {
            
-           
-            $http.post(g_restaurantUrlBase+"/review/"+currentRestaurant.id, r).
+            var errorMessage = null;
+            $http.post(g_restaurantUrlBase+"review/"+currentRestaurant.id, newReview).
                     success(function (data, status, headers, config) {
-                        this.getAllRestaurants().unshift(r);
-                        r.reviewDTOs = [];
-                        r.id = data.id;
+                        this.getAllRestaurants().unshift(newReview);
+                        newReview.reviewDTOs = [];
+                        newReview.id = data.id;
                     }).
                     error(function (data, status, headers, config) {
                         errorMessage = data.message;
@@ -24,12 +24,20 @@
        
        daoService.saveReview = function(currentRestaurant,newReview) 
        {
-            
+            var saveURL = g_restaurantUrlBase+"review/"+currentRestaurant.id +
+                    "/"+newReview.id;
+            return $http.put(saveURL, newReview).
+                    success(function (data, status, headers, config) {
+                        
+                    });
        }
        
-       daoService.removeReview = function(currentRestaurant,newReview) 
+       daoService.deleteReview = function(currentRestaurant,newReview) 
        {
-            
+            var deleteURL = g_restaurantUrlBase+"review/"+currentRestaurant.id +
+                    "/"+newReview.id;
+            return $http.delete(deleteURL);
+                     
        }
        
         return daoService;

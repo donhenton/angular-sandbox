@@ -16,10 +16,28 @@
 
         factory.deleteRestaurant = function (restaurant)
         {
-            restaurantDAOService.deleteRestaurant(restaurant);
-            currentRestaurant = this.createEmptyRestaurant();
-            messageFactory.raiseEvent(currentRestaurant, "ON_RESTAURANT_DELETE");
-        };
+
+
+            return restaurantDAOService.deleteRestaurant(restaurant).
+                    success(function (data, status, headers, config) {
+                        restaurantList = restaurantDAOService.getAllRestaurants();
+                        currentRestaurant = this.createEmptyRestaurant();
+                        messageFactory.raiseEvent(currentRestaurant, "ON_RESTAURANT_DELETE");
+                         console.log("factory delete count "+
+                                  restaurantList.length);
+
+                    }).error(function (data, status, headers, config) {
+
+                        messageFactory.raiseEvent(data, "ON_ERROR");
+                    });
+
+
+
+
+
+
+
+        }
         factory.resetCurrentStatus = function ()
         {
 
@@ -93,28 +111,30 @@
         factory.saveRestaurant = function (newRestaurant)
         {
 
-            
-                if (newRestaurant.id > 0)
-                {
-                   return  restaurantDAOService.saveRestaurant(newRestaurant).
-                    success(function (data, status, headers, config) {
-                        restaurantList = 
-                                restaurantDAOService.getAllRestaurants();
-                    }); 
-                }
-                else
-                {
-                    return restaurantDAOService.addRestaurant(newRestaurant).
-                    success(function (data, status, headers, config) {
-                        restaurantList = 
-                                restaurantDAOService.getAllRestaurants();
-                    }); 
-                }
-            
-            
+
+            if (newRestaurant.id > 0)
+            {
+                console.log("in save restaurant factory " + newRestaurant.id)
+
+                return  restaurantDAOService.saveRestaurant(newRestaurant).
+                        success(function (data, status, headers, config) {
+                            restaurantList =
+                                    restaurantDAOService.getAllRestaurants();
+                        });
+            }
+            else
+            {
+                return restaurantDAOService.addRestaurant(newRestaurant).
+                        success(function (data, status, headers, config) {
+                            restaurantList =
+                                    restaurantDAOService.getAllRestaurants();
+                        });
+            }
 
 
-            
+
+
+
 
         };
 
@@ -136,26 +156,26 @@
         //this would be a service call
         factory.getRestaurantList = function ()
         {
-            
+
             return restaurantList;
         };
 
 
-      //  factory.getRestaurantList();
+        //  factory.getRestaurantList();
 
 
         factory.init = function ()
         {
-           return restaurantDAOService.init().
+            return restaurantDAOService.init().
                     success(function (data, status, headers, config) {
                         console.log("factory init")
                         restaurantList = data;
                         currentRestaurant = {};
                         factory.resetCurrentStatus();
-                         
+
                     });
         }
-         
+
 
         return factory;
     };

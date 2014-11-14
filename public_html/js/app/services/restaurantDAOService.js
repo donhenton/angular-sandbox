@@ -75,6 +75,7 @@
             return $http.put(g_restaurantUrlBase  + newRestaurant.id, newRestaurant).
                     success(function (data, status, headers, config) {
                         var lookup = daoService.getRestaurantById(newRestaurant.id);
+                        console.log("save lookup "+lookup.id);
                         daoService.loadRestaurant(lookup, newRestaurant);
                     }) ;
 
@@ -100,12 +101,12 @@
         daoService.deleteRestaurant = function (restaurant)
         {
 
-           
+            console.log("delete restaurant daoService");
             return  $http.delete(g_restaurantUrlBase  + restaurant.id).
                     success(function (data, status, headers, config) {
-
+                        console.log("delete restaurant daoService 2");
                         var idx = -1;
-                        var resCollection = this.getAllRestaurants();
+                        var resCollection = daoService.getAllRestaurants();
                         for (var i = 0; i < resCollection.length; i++)
                         {
                             if (resCollection[i].id === restaurant.id)
@@ -120,7 +121,9 @@
                             setUpRestaurantList();
                         }
 
-                    }) 
+                    }).error(function (data, status, headers, config) {
+                        console.log("dao delete error "+status);
+                    } )
 
         }
 

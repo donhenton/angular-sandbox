@@ -43,7 +43,18 @@
                     + restaurant.name + "'?")
             if (r == true) {
                 //$log.log("peform delete " + restaurant.name);
-                restaurantFactory.deleteRestaurant(restaurant);
+                restaurantFactory.deleteRestaurant(restaurant).
+                    success(function (data, status, headers, config) {
+                         
+                         $scope.restaurantList =     
+                                 restaurantFactory.getRestaurantList();
+                         console.log("controller delete count "+
+                                 $scope.restaurantList.length);
+                      
+                    }).
+                    error(function (data, status, headers, config) {
+                        messageFactory.raiseEvent("delete  error "+data);
+                    }); 
             }
         };
         messageFactory.subscribe(onError, "ON_ERROR");

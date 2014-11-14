@@ -82,10 +82,19 @@
         {
 
             var r = window.confirm("Do you wish to delete this review?")
-            $scope.cancelReviewEdit(review);
+
             if (r == true) {
-                reviewFactory.deleteReview(review);
-                $scope.currentReviews = reviewFactory.scatterCurrentReviews();
+                reviewFactory.deleteReview(review).
+                        success(function (data, status, headers, config) {
+
+                            $scope.cancelReviewEdit(review);
+
+                        }).
+                        error(function (data, status, headers, config) {
+                            messageFactory.raiseEVENT("unable to delete review");
+                        });
+
+
             }
         }
 
@@ -102,20 +111,27 @@
 
             if ($scope.editReviewForm.$valid)
             {
-                var success = reviewFactory.saveReviewEdit(review);
-                //TODO only do this if successful
-                $scope.cancelReviewEdit(review);
-                review.isEditing = false;
-                console.log("got to valid");
+                reviewFactory.saveReviewEdit(review).
+                        success(function (data, status, headers, config) {
+
+                            $scope.cancelReviewEdit(review);
+                            review.isEditing = false;
+
+                        }).
+                        error(function (data, status, headers, config) {
+                            messageFactory.raiseEVENT("unable to save review");
+                        });
+               
+
             }
             else
             {
                 messageFactory.raiseEvent("review text cannnot be blank", "ON_ERROR");
             }
-            
-            
+
+
         }
-        $scope.cancelReviewEdit = function(review)
+        $scope.cancelReviewEdit = function (review)
         {
             $scope.isAdding = false;
             $scope.currentReviews = reviewFactory.scatterCurrentReviews();
