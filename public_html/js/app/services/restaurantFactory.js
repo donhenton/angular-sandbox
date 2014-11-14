@@ -32,12 +32,12 @@
         {
             this.resetCurrentStatus();
             restaurant.is_current = true;
-           // $log.log('current' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
+            // $log.log('current' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
             currentRestaurant = restaurant;
             this.getRestaurantList();
 
             //$log.log('backup ' + restaurant.name + " " + restaurant.zip + " " + restaurant.state)
-           // messageFactory.raiseEvent("", "ON_ERROR");
+            // messageFactory.raiseEvent("", "ON_ERROR");
             messageFactory.raiseEvent(restaurant, "ON_RESTAURANT_CHANGE");
 
         };
@@ -78,16 +78,16 @@
         factory.validateRestaurant = function (restaurant)
         {
             var errorMessage = null;
-            if (typeof restaurant.name == 'undefined' || 
+            if (typeof restaurant.name == 'undefined' ||
                     restaurant.name === null || restaurant.name.trim() === "")
                 errorMessage = "Name cannot be blank";
-            if (typeof restaurant.zipCode == 'undefined' || 
+            if (typeof restaurant.zipCode == 'undefined' ||
                     restaurant.zipCode === null || restaurant.zipCode.trim() === "")
                 errorMessage = "Zip Code cannot be blank";
-            if (typeof restaurant.city == 'undefined' || 
+            if (typeof restaurant.city == 'undefined' ||
                     restaurant.city === null || restaurant.city.trim() === "")
                 errorMessage = "City cannot be blank";
-            if (typeof restaurant.state == 'undefined' || 
+            if (typeof restaurant.state == 'undefined' ||
                     restaurant.state === null || restaurant.state.trim() === "")
                 errorMessage = "State cannot be blank";
 
@@ -98,7 +98,7 @@
         {
 
             var errorMessage = null;
-            
+
             errorMessage = this.validateRestaurant(newRestaurant);
             if (errorMessage === null)
             {
@@ -118,8 +118,8 @@
                 restaurantList = restaurantDAOService.getAllRestaurants();
 
             }
-             
-            
+
+
             return errorMessage;
 
         };
@@ -142,19 +142,27 @@
         //this would be a service call
         factory.getRestaurantList = function ()
         {
-            if (restaurantList === null)
-            {
-                restaurantList = restaurantDAOService.getAllRestaurants();
-            }
-
-
+            
             return restaurantList;
         };
 
 
-        factory.getRestaurantList();
-        //       factory.setUpRestaurantList();
+      //  factory.getRestaurantList();
 
+
+        factory.init = function ()
+        {
+           return restaurantDAOService.init().
+                    success(function (data, status, headers, config) {
+                        console.log("factory init")
+                        restaurantList = data;
+                        // setUpRestaurantList();
+                    }).
+                    error(function (data, status, headers, config) {
+
+                    });
+        }
+         
 
         return factory;
     };

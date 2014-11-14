@@ -1,6 +1,6 @@
 (function () {
 
-    var restaurantDAOService = function ($log, $resource) {
+    var restaurantDAOService = function ($log, $http) {
 
         var daoService = {};
         var localRestaurantCopy = null;
@@ -63,13 +63,22 @@
         //@
         daoService.getAllRestaurants = function ()
         {
-            if (localRestaurantCopy === null)
-            {
-                localRestaurantCopy = $http.get(g_restaurantUrlBase);
-            }
             return localRestaurantCopy;
-            
+
         };
+
+        daoService.init = function ()
+        {
+            return  $http.get(g_restaurantUrlBase + "/restaurant").
+                    success(function (data, status, headers, config) {
+                        console.log("dao init")
+                        localRestaurantCopy = data;
+                        // setUpRestaurantList();
+                    }).
+                    error(function (data, status, headers, config) {
+
+                    });
+        }
         /**
          * //@
          * @param {type} newRestaurant
@@ -93,7 +102,7 @@
         //@
         daoService.deleteRestaurant = function (restaurant)
         {
-   
+
             var errorMessage = null;
 
             $http.delete(g_restaurantUrlBase + "/" + restaurant.id).
@@ -123,7 +132,7 @@
             return errorMessage;
 
         }
-        setUpRestaurantList();
+
         return daoService;
     };
     restaurantDAOService.$inject = ['$log', '$http'];

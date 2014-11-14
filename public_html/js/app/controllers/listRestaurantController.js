@@ -2,10 +2,22 @@
 
     var listRestaurantController = function ($scope, $log, restaurantFactory, messageFactory) {
 
-
-
-        $scope.restaurantList = restaurantFactory.getRestaurantList();
+        $scope.restaurantList = null;
         $scope.errorMessage = "";
+
+        var init = function()
+        {
+            restaurantFactory.init().
+                    success(function (data, status, headers, config) {
+                        console.log("controller init")
+                         $scope.restaurantList =    data;
+                      
+                    }).
+                    error(function (data, status, headers, config) {
+                        messageFactory.raiseEvent("Initiation error")
+                    });
+        }
+        init();
 
         $scope.changeRestaurant = function (event, restaurant)
         {

@@ -1,6 +1,6 @@
 (function () {
 
-    var reviewDAOService = function ($log) {
+    var reviewDAOService = function ($log,$http) {
 
         var daoService = {};
         
