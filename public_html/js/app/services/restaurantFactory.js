@@ -145,10 +145,10 @@
             if (typeof currentRestaurant.id == 'undefined' || currentRestaurant.id != 0)
             {
                 var source = restaurantDAOService.getRestaurantById(currentRestaurant.id)
-                //$log.log("source in restore id " + source.id + " " + source.name);
+                console.log("source in restore id " + source.id + " " + source.name);
                 restaurantDAOService.loadRestaurant(currentRestaurant, source);
-                //$log.log("currentRestaurant in restore id " + currentRestaurant.id + " " +
-                //        currentRestaurant.name);
+                console.log("currentRestaurant in restore id " + currentRestaurant.id + " " +
+                      currentRestaurant.name);
             }
 
 
