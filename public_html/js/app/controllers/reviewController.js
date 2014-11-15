@@ -91,7 +91,7 @@
 
                         }).
                         error(function (data, status, headers, config) {
-                            messageFactory.raiseEVENT("unable to delete review");
+                            messageFactory.raiseEvent("unable to delete review");
                         });
 
 

@@ -142,7 +142,7 @@ app.delete('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
      
     var message = daoService.deleteReview(restaurantId,reviewId);
     if (message == null)
-        return;
+        return res.json(null);
     else
     {
         var resVar = daoService.createError(message, "NotFoundClass");
@@ -257,28 +257,28 @@ daoService.deleteRestaurant = function (restaurant)
     //
     //splice it out
     //setUpRestaurantList();
-    console.log("del 1");
+    //console.log("del 1");
     var errorMessage = null;
     var idx = -1;
     var resCollection = this.getAllRestaurants();
-    console.log("del 2 "+resCollection.length);
+    //console.log("del 2 "+resCollection.length);
     
     for (i = 0; i < resCollection.length; i++)
     {
         if (resCollection[i].id === restaurant.id)
         {
             idx = i;
-            console.log("del 3 hit "+idx)
+            //console.log("del 3 hit "+idx)
             break;
         }
     }
-     console.log("dao delete4 "+idx)
+     //console.log("dao delete4 "+idx)
     if (idx > -1)
     {
         resCollection.splice(idx, 1);
-        console.log("dao delete5 "+idx)
+        //console.log("dao delete5 "+idx)
         setUpRestaurantList();
-        console.log("dao delete6 "+idx)
+        //console.log("dao delete6 "+idx)
     }
     else
     {

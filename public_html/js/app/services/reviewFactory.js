@@ -54,7 +54,13 @@
         factory.addReview = function (newReview)
         {
 
-            reviewDAOService.addReview(currentRestaurant, newReview);
+            reviewDAOService.addReview(currentRestaurant, newReview).
+                    success(function (data, status, headers, config) {
+                        var reviews = currentRestaurant.reviewDTOs;
+                        reviews.unshift(newReview);
+                        newReview.reviewDTOs = [];
+                        newReview.id = data.id;
+                    });
 
         }
 
@@ -88,6 +94,7 @@
                             if (reviews[i].id === newReview.id)
                             {
                                 reviews.splice(i, 1);
+                                console.log("deleteReview " + i)
                                 break;
                             }
                         }

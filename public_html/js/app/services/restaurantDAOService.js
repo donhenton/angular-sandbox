@@ -91,7 +91,7 @@
             
             return  $http.post(g_restaurantUrlBase, r).
                     success(function (data, status, headers, config) {
-                        this.getAllRestaurants().unshift(r);
+                        daoService.getAllRestaurants().unshift(r);
                         r.reviewDTOs = [];
                         r.id = data.id;
                     }) ;
