@@ -1,7 +1,5 @@
 (function() {
     
-    var app = angular.module('listApp', []);
-     
-    
-    
+    var app = angular.module('restaurantApp', ['ngResource']);
+
 }());
