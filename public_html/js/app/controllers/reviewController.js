@@ -67,10 +67,16 @@
             {
                 var revCopy = {};
                 reviewFactory.transferReview($scope.addNewReviewBuffer, revCopy);
-                reviewFactory.addReview(revCopy)
-                messageFactory.raiseEvent("", "ON_ERROR");
-                $scope.currentReviews = reviewFactory.scatterCurrentReviews();
-                $scope.isAdding = false;
+                reviewFactory.addReview(revCopy).
+                        success(function (data, status, headers, config) {
+                            messageFactory.raiseEvent("", "ON_ERROR");
+                            $scope.currentReviews = reviewFactory.scatterCurrentReviews();
+                            $scope.isAdding = false;
+                        }).
+                        error(function (data, status, headers, config) {
+                            messageFactory.raiseEvent("problem with add review"+data, "ON_ERROR");     
+                        });
+
             }
             else
             {
@@ -121,7 +127,7 @@
                         error(function (data, status, headers, config) {
                             messageFactory.raiseEVENT("unable to save review");
                         });
-               
+
 
             }
             else

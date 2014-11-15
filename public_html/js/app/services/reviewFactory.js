@@ -54,11 +54,10 @@
         factory.addReview = function (newReview)
         {
 
-            reviewDAOService.addReview(currentRestaurant, newReview).
+         return   reviewDAOService.addReview(currentRestaurant, newReview).
                     success(function (data, status, headers, config) {
                         var reviews = currentRestaurant.reviewDTOs;
                         reviews.unshift(newReview);
-                        newReview.reviewDTOs = [];
                         newReview.id = data.id;
                     });
 
@@ -121,7 +120,6 @@
                 scatteredReviews.push(newRev);
             }
             )
-
             return   scatteredReviews;
         }
 
