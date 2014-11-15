@@ -77,7 +77,12 @@
                 }
 
             }
-            errorMessage = restaurantFactory.validateRestaurant($scope.currentRestaurant);
+            if (errorMessage == null)
+            {
+                errorMessage =
+                        restaurantFactory.
+                        validateRestaurant($scope.currentRestaurant);
+            }
             //console.log("save click 3 error '"+errorMessage +"'");
             if (errorMessage !== null)
             {
@@ -90,6 +95,7 @@
                         success(function (data, status, headers, config) {
                             $scope.canAdd = true;
                             $scope.recordPresent = false;
+                            messageFactory.raiseEvent(errorMessage, "ON_SAVE");
                             resetForm();
 
                         }).

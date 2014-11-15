@@ -14,7 +14,7 @@
                       
                     }).
                     error(function (data, status, headers, config) {
-                        messageFactory.raiseEvent("Initiation error")
+                        onError("Initiation error");
                     });
         }
         init();
@@ -31,6 +31,13 @@
         {
 
             $scope.errorMessage = message;
+
+        };
+         var onSave = function (message)
+        {
+
+            $scope.errorMessage = "";
+            restaurantFactory.resetCurrentStatus();
 
         };
 
@@ -58,6 +65,7 @@
             }
         };
         messageFactory.subscribe(onError, "ON_ERROR");
+        messageFactory.subscribe(onSave, "ON_SAVE");
     }
 
     listRestaurantController.$inject = ['$scope', '$log', 'restaurantFactory', 'messageFactory'];
