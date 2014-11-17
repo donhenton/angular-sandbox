@@ -74,7 +74,7 @@
                             $scope.isAdding = false;
                         }).
                         error(function (data, status, headers, config) {
-                            messageFactory.raiseEvent("problem with add review"+data, "ON_ERROR");     
+                            messageFactory.raiseEvent("problem with add review "+data, "ON_ERROR");     
                         });
 
             }
@@ -97,7 +97,7 @@
 
                         }).
                         error(function (data, status, headers, config) {
-                            messageFactory.raiseEvent("unable to delete review");
+                            messageFactory.raiseEvent("unable to delete review "+data);
                         });
 
 

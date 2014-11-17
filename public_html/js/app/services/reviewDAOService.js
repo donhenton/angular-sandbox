@@ -6,7 +6,8 @@
         
        daoService.addReview = function(currentRestaurant,newReview) 
        {               
-            newReview.parentRestaurantId = currentRestaurant.id;
+           newReview.parentRestaurantId = currentRestaurant.id;
+           newReview.id = null;
            return  $http.post(g_restaurantUrlBase+"review/"+currentRestaurant.id, newReview)
        }
        

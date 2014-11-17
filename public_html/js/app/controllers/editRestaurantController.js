@@ -94,7 +94,7 @@
 
                         }).
                         error(function (data, status, headers, config) {
-                            messageFactory.raiseEvent(data.message, "ON_ERROR");
+                            messageFactory.raiseEvent(data, "ON_ERROR");
                         });
 
 

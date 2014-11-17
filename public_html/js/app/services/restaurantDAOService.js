@@ -88,7 +88,7 @@
          */
         daoService.addRestaurant = function (r)
         {
-            
+            r.id = null;
             return  $http.post(g_restaurantUrlBase, r).
                     success(function (data, status, headers, config) {
                         daoService.getAllRestaurants().unshift(r);
