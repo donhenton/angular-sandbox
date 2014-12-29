@@ -15,3 +15,6 @@ reviews. The root url is defined in s script in the index.html page
 
 The master branch is currently the up to date branch for the code 
 going forward. Tags do not contain the latest code.
+
+
+the default location for the node server install is /usr/local/bin
