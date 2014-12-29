@@ -18,3 +18,13 @@ going forward. Tags do not contain the latest code.
 
 
 the default location for the node server install is /usr/local/bin
+/usr/local/lib/modules for the libraries, edit your bash_profile to set the
+variable NODE_PATH to point to this directory
+
+in netbeans install the nodejs plugin, search for Options in the search
+option for Netbeans and find the options screen set the command to launch 
+node to :
+
+export NODE_PATH=/usr/local/lib/node_modules;
+cd ${workingdir};
+/usr/local/bin/node ${selectedfile};
