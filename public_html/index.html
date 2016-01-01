@@ -17,7 +17,6 @@ and open the template in the editor.
     </head>
     <body ng-app="waitApp" ng-controller="SectionCtrl as section">
         <h3>Wait Animation Demonstration</h3> 
-        <button    ng-hide="section.loading" ng-click="section.successAction()" class="button">Success</button><button ng-hide="section.loading" ng-click="section.failureAction()" class="button">Failure</button>
         <div  class="block-container">
 
             <section id="block1" class="block-section">
@@ -28,29 +27,30 @@ and open the template in the editor.
 
             </section>
 
-            <div id="rowHolder" >
 
-                <section id="blockA" class="block-section rowItem">
 
-                    <content-component loading="section.loading"  dataValue='section.data[1]' ng-cloak ng-hide='section.loading || section.error'></content-component>
-                    <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
-                    <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
-                </section>
+            <section id="blockA" class="block-section box">
 
-                <section id="blockB" class="block-section rowItem">
+                <content-component loading="section.loading"  dataValue='section.data[1]' ng-cloak ng-hide='section.loading || section.error'></content-component>
+                <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
+                <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
+            </section>
 
-                    <content-component loading="section.loading"  dataValue='section.data[2]' ng-cloak ng-hide='section.loading || section.error'></content-component>
-                    <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
-                    <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
-                </section>
+            <section id="blockB" class="block-section box">
 
-                <section id="blockC" class="block-section rowItem">
+                <content-component loading="section.loading"  dataValue='section.data[2]' ng-cloak ng-hide='section.loading || section.error'></content-component>
+                <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
+                <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
+            </section>
 
-                    <content-component loading="section.loading"  dataValue='section.data[3]' ng-cloak ng-hide='section.loading || section.error'></content-component>
-                    <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
-                    <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
-                </section>
+            <section id="blockC" class="block-section box">
 
+                <content-component loading="section.loading"  dataValue='section.data[3]' ng-cloak ng-hide='section.loading || section.error'></content-component>
+                <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
+                <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
+            </section>
+            <div class="button-container">     
+                <button  ng-cloak   ng-hide="section.loading" ng-click="section.successAction()" class="button">Success</button><button ng-hide="section.loading" ng-click="section.failureAction()" class="button">Failure</button>
             </div>
 
         </div>
