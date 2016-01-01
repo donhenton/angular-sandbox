@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Wait Animation Demo</title>
+        <meta charset="UTF-8">
+
+        <link href="waitAssets/css/waitStyles.css" rel="stylesheet" type="text/css"/>
+
+
+
+
+    </head>
+    <body ng-app="waitApp" ng-controller="SectionCtrl as section">
+        <h3>Wait Animation Demonstration</h3> 
+        <button    ng-hide="section.loading" ng-click="section.successAction()" class="button">Success</button><button ng-hide="section.loading" ng-click="section.failureAction()" class="button">Failure</button>
+        <div  class="block-container">
+
+            <section id="block1" class="block-section">
+
+                <content-component loading="section.loading" dataValue='section.data[0]' ng-cloak ng-hide='section.loading || section.error'></content-component>
+                <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
+                <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
+
+            </section>
+
+            <div id="rowHolder" >
+
+                <section id="blockA" class="block-section rowItem">
+
+                    <content-component loading="section.loading"  dataValue='section.data[1]' ng-cloak ng-hide='section.loading || section.error'></content-component>
+                    <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
+                    <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
+                </section>
+
+                <section id="blockB" class="block-section rowItem">
+
+                    <content-component loading="section.loading"  dataValue='section.data[2]' ng-cloak ng-hide='section.loading || section.error'></content-component>
+                    <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
+                    <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
+                </section>
+
+                <section id="blockC" class="block-section rowItem">
+
+                    <content-component loading="section.loading"  dataValue='section.data[3]' ng-cloak ng-hide='section.loading || section.error'></content-component>
+                    <wait-component   ng-cloak  ng-hide='!section.loading'>Loading...</wait-component>
+                    <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
+                </section>
+
+            </div>
+
+        </div>
+        <script src="../libs/angular/angular.js" type="text/javascript"></script>
+        <script src="../libs/angular-animate/angular-animate.min.js" type="text/javascript"></script>
+        <script src="waitAssets/js/app.js" type="text/javascript"></script>
+        <script src="waitAssets/js/directives/waitComponent.drct.js" type="text/javascript"></script>
+        <script src="waitAssets/js/controllers/sectionController.js" type="text/javascript"></script>
+        <script src="waitAssets/js/directives/contentComponent.drct.js" type="text/javascript"></script>
+    </body>
+</html>
