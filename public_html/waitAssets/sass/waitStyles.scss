@@ -18,7 +18,40 @@ body {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAY
       margin: 20px;
 }
 
-  
+
+.dismissible
+{
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #8a6d3b;
+    width: 50%;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    padding-right: 35px;
+    
+    .dismissible-close
+    {
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+        float: right;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 1;
+        text-shadow: 0 1px 0 #fff;
+        opacity: 0.4;
+    }
+    
+}
+ 
+
+ 
+
+
 
 .block-container
 { 
