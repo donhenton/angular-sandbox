@@ -1,0 +1,2 @@
+
+http://www.w3schools.com/angular/angular_animations.asp
