@@ -1,2 +1,13 @@
 
 http://www.w3schools.com/angular/angular_animations.asp
+http://www.angularjshub.com/examples/routing/locationservice/
+
+
+$scope.locationAbsUrl = $location.absUrl();
+      $scope.locationUrl = $location.url();
+      $scope.locationProtocol = $location.protocol();
+      $scope.locationHost = $location.host();
+      $scope.locationPort = $location.port();
+      $scope.locationPath = $location.path();
+      $scope.locationSearch = $location.search();
+      $scope.locationHash = $location.hash();

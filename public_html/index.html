@@ -21,7 +21,7 @@ and open the template in the editor.
         <h3>Wait Animation Demonstration</h3> 
         <div  class="block-container">
             
-            <div ng-hide='!section.showBanner'  class="dismissible"> <button type="button" class="dismissible-close"><span  ng-click="section.removeBanner()">×</span></button> <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good. </div>
+            <div ng-cloak ng-hide='!section.showBanner'  class="dismissible"> <button type="button" class="dismissible-close"><span  ng-click="section.removeBanner()">×</span></button> <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good. </div>
            
 
             <section id="block1" class="block-section">
@@ -55,7 +55,8 @@ and open the template in the editor.
                 <error-component   ng-cloak  ng-hide='!section.error'>{{section.errorMessage}}</error-component>
             </section>
             <div class="button-container">     
-                <button  ng-cloak   ng-hide="section.loading" ng-click="section.successAction()" class="button">Success</button><button ng-hide="section.loading" ng-click="section.failureAction()" class="button">Failure</button>
+                <p><button  ng-cloak   ng-hide="section.loading" ng-click="section.successAction()" class="button">Success</button><button ng-hide="section.loading" ng-click="section.failureAction()" class="button">Failure</button></p>
+                <p>{{section.searchInfo}}</p>
             </div>
 
         </div>

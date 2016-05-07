@@ -5,25 +5,36 @@
  */
 angular.module('waitApp')
 
-        .controller('SectionCtrl', function ($scope, $log, $timeout)
+ 
+        .config(function ($locationProvider)
+        {
+            $locationProvider.html5Mode({
+                enabled: true,
+                requireBase: false
+            }).hashPrefix("!");
+        })
+ 
+
+        .controller('SectionCtrl', function ($scope, $log, $timeout, $location)
         {
             var vm = this;
+            vm.searchInfo = JSON.stringify($location.search());
+            vm.searchCollection = $location.search();
              
-
-            vm.displayBanner = function()
+            vm.displayBanner = function ()
             {
                 vm.showBanner = true;
 
-                    $timeout(function () {
-                        vm.removeBanner();
+                $timeout(function () {
+                    vm.removeBanner();
 
-                    }, 10000);
+                }, 60000);
             }
-            
-            
+
+
             vm.removeBanner = function ()
             {
-                    vm.showBanner = false;
+                vm.showBanner = false;
             }
 
             vm.successAction = function ()
@@ -32,9 +43,7 @@ angular.module('waitApp')
                 vm.loading = true;
                 vm.error = false;
                 vm.data = [1, 2, 3, 4];
-                vm.displayBanner();
-
-                
+ 
                 $timeout(function () {
                     vm.loading = false;
                     vm.error = false;
@@ -71,6 +80,14 @@ angular.module('waitApp')
             }
 
             vm.successAction();
+            if (vm.searchCollection["showBanner"])
+            {
+                 vm.displayBanner();
+            }
+            else
+            {
+                vm.showBanner = false;
+            }
         });
 
 
