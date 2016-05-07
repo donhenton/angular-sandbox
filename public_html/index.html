@@ -21,7 +21,7 @@ and open the template in the editor.
         <h3>Wait Animation Demonstration</h3> 
         <div  class="block-container">
             
-                    <div ng-hide='!section.loading'  class="dismissible"> <button type="button" class="dismissible-close"><span aria-hidden="true">×</span></button> <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good. </div>
+            <div ng-hide='!section.showBanner'  class="dismissible"> <button type="button" class="dismissible-close"><span  ng-click="section.removeBanner()">×</span></button> <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good. </div>
            
 
             <section id="block1" class="block-section">
