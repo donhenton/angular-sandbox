@@ -43,7 +43,7 @@ angular.module('waitApp')
                 vm.loading = true;
                 vm.error = false;
                 vm.data = [1, 2, 3, 4];
- 
+                vm.displayBanner();
                 $timeout(function () {
                     vm.loading = false;
                     vm.error = false;
